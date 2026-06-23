@@ -177,10 +177,7 @@ export default function Page() {
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          // pitch-black backdrop
           backgroundColor: 0x0a0a0a,
-          // restrained dark-gold line tone so the wave topology stays subtle
-          // and never competes with the foreground type
           color: 0x4a3a16,
         })
       }
@@ -228,7 +225,14 @@ export default function Page() {
   const close = () => setIsOpen(false)
 
   return (
-    <main className="relative bg-background text-foreground">
+    <main className="relative bg-background text-foreground min-h-screen">
+      {/* 3D WEBGL CANVAS TARGET LAYER */}
+      <div 
+        id="vanta-canvas" 
+        className="fixed inset-0 w-full h-full -z-10 pointer-events-none" 
+        style={{ backgroundColor: "#0A0A0A" }} 
+      />
+
       <Cursor />
       <Nav onConsult={open} />
       <Hero onBook={open} />
