@@ -81,6 +81,7 @@ export default function Page() {
     let vantaEffect: any = null
     let rafId = 0
     let cancelled = false
+    let globalScrollHandler: ((e: MouseEvent) => void) | null = null
 
     const revealFallback = () => {
       document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
@@ -106,17 +107,15 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- 1. Elite Smooth Scroll Implementation ---
+      // --- 1. Premium Smooth Scroll & Anchor Tracking ---
       if (Lenis) {
-        const lenis = new Lenis({ duration: 1.25, smoothWheel: true })
+        const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
         const raf = (time: number) => {
           lenis.raf(time)
           
-          // Micro-Upgrade: Cinematic Parallax Depth Modulation
           if (vantaEffect && vantaEffect.options) {
             const velocity = Math.abs(lenis.velocity || 0)
-            // Waves subtly expand and compress based on scroll velocity bursts
             vantaEffect.options.scale = 1.0 + Math.min(velocity * 0.04, 0.25)
           }
           
@@ -124,9 +123,30 @@ export default function Page() {
         }
         rafId = requestAnimationFrame(raf)
         if (ScrollTrigger) lenis.on("scroll", ScrollTrigger.update)
+
+        // Micro-Upgrade: Global Cinematic Smooth Scroll Routing
+        globalScrollHandler = (e: MouseEvent) => {
+          const target = e.target as HTMLElement
+          const anchor = target.closest("a")
+          if (anchor) {
+            const href = anchor.getAttribute("href")
+            if (href && href.startsWith("#")) {
+              e.preventDefault()
+              const targetSection = document.querySelector(href)
+              if (targetSection) {
+                lenis.scrollTo(targetSection, {
+                  offset: -20,
+                  duration: 1.6,
+                  immediate: false
+                })
+              }
+            }
+          }
+        }
+        document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- 2. Ultra-Premium Text and Structural Reveals ---
+      // --- 2. Animations & Layout Interactions ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -155,7 +175,7 @@ export default function Page() {
           })
         })
 
-        // Micro-Upgrade: Elite Magnetic Button Mechanics
+        // Magnetic Button Mechanics
         const interactiveTargets = document.querySelectorAll("button, a, [role='button']")
         interactiveTargets.forEach((btn: any) => {
           btn.addEventListener("mousemove", (e: MouseEvent) => {
@@ -164,9 +184,9 @@ export default function Page() {
             const mouseY = e.clientY - bounds.top - bounds.height / 2
             
             gsap.to(btn, {
-              x: mouseX * 0.4,
-              y: mouseY * 0.4,
-              scale: 1.03,
+              x: mouseX * 0.35,
+              y: mouseY * 0.35,
+              scale: 1.02,
               duration: 0.3,
               ease: "power2.out"
             })
@@ -183,8 +203,8 @@ export default function Page() {
           })
         })
 
-        // Micro-Upgrade: Real-Time Luxury Copy-writing Mutation
-        document.querySelectorAll("button, a, span, h2").forEach((el: any) => {
+        // Real-Time Luxury Copywriting Mutation Engine
+        document.querySelectorAll("button, a, span, h2, sub").forEach((el: any) => {
           if (!el.children.length && el.textContent) {
             const txt = el.textContent.trim()
             if (txt.toLowerCase() === "book appointment") {
@@ -202,7 +222,7 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- 3. Hardware-Accelerated 3D Background Config ---
+      // --- 3. Initialize Vanta Topology ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -225,6 +245,9 @@ export default function Page() {
     return () => {
       cancelled = true
       if (rafId) cancelAnimationFrame(rafId)
+      if (globalScrollHandler) {
+        document.removeEventListener("click", globalScrollHandler)
+      }
       if (vantaEffect) {
         try { vantaEffect.destroy() } catch {}
       }
@@ -256,30 +279,34 @@ export default function Page() {
   const close = () => setIsOpen(false)
 
   return (
-    <main className="relative min-h-screen bg-transparent select-none overflow-x-hidden">
-      {/* GLOBAL HIGH-CONTRAST LUXURY INJECTOR STYLE SHEET */}
-      <style jsx global>{`
-        body {
+    <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
+      {/* NATIVE FORCE-INJECTOR SHEET FOR DIAMOND WHITE TYPOGRAPHY & PERSISTENT BACKGROUNDS */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        html, body {
           background-color: #0A0A0A !important;
         }
-        main p, main span, main h1, main h2, main h3, main li, main a {
+        /* Lock down pure diamond white text globally across sub-components, paragraphs, and list blocks */
+        main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
-          text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.85);
         }
-        /* Keep theme gold text nodes explicitly gold if stylized */
-        .text-primary, [class*="text-gold"], .split-words {
+        /* Keep target geometric styling headers or outline branding variables pristine gold */
+        .text-primary, [class*="text-gold"], .split-words, [style*="color: rgb(204"] {
           color: #cca43b !important;
         }
-      `}</style>
+        .font-outline {
+          -webkit-text-stroke: 1px #cca43b !important;
+          color: transparent !important;
+        }
+      `}} />
 
-      {/* 3D CANVAS LAYER (Completely detached behind layout, ignoring interference clicks) */}
+      {/* 3D CANVAS BACKGROUND LAYER (Perfectly layered above deep canvas backdrop, safely below content) */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full pointer-events-none" 
-        style={{ backgroundColor: "#0A0A0A", zIndex: -1 }} 
+        style={{ zIndex: 1 }} 
       />
 
-      {/* COMPONENT FOREGROUND VIEWPORT (Fully interactive interactive events restored) */}
+      {/* COMPONENT INTERACTION CONTAINER (Set high at z-10 for total input accessibility) */}
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={open} />
