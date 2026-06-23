@@ -74,6 +74,7 @@ function loadScript(src: string): Promise<void> {
 
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
+  const [sonicWaveActive, setSonicWaveActive] = useState(false)
   const lenisRef = useRef<any>(null)
   const audioCtxRef = useRef<AudioContext | null>(null)
 
@@ -93,7 +94,6 @@ export default function Page() {
       const gainNode = ctx.createGain()
 
       osc.type = "sine"
-      // Click is a deeper mechanical sound, hover is a precision high-frequency tick
       osc.frequency.setValueAtTime(isClick ? 800 : 1600, ctx.currentTime)
       osc.frequency.exponentialRampToValueAtTime(isClick ? 150 : 400, ctx.currentTime + 0.015)
 
@@ -105,8 +105,12 @@ export default function Page() {
 
       osc.start()
       osc.stop(ctx.currentTime + 0.016)
+
+      // Trigger the Sonic UI visualization feedback sheet
+      setSonicWaveActive(true)
+      setTimeout(() => setSonicWaveActive(false), 150)
     } catch (e) {
-      // Audio fallback silent to avoid throwing errors before user gesture
+      // Audio fallback silent to maintain stability
     }
   }
 
@@ -126,7 +130,7 @@ export default function Page() {
 
     async function init() {
       try {
-        // PILLAR 2: Fast Parallel Asset Processing
+        // Parallel Script Optimization Core
         await Promise.all([
           loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
@@ -223,11 +227,9 @@ export default function Page() {
         const interactiveTargets = document.querySelectorAll("button, a, [role='button'], .nav-link-item")
         interactiveTargets.forEach((btn: any) => {
           
-          // Inject Sonic Haptics
           btn.addEventListener("mouseenter", () => playMechanicalTick(false))
           btn.addEventListener("click", () => playMechanicalTick(true))
 
-          // Premium Smooth Magnetics
           btn.addEventListener("mousemove", (e: MouseEvent) => {
             const bounds = btn.getBoundingClientRect()
             const mouseX = e.clientX - bounds.left - bounds.width / 2
@@ -426,6 +428,20 @@ export default function Page() {
         div[role="dialog"] h2, div[role="dialog"] p {
           color: #ffffff !important;
         }
+
+        /* VOLUMETRIC GOLD PARTICULATE ENGINE */
+        @keyframes drift {
+          0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+          50% { opacity: 0.15; }
+          100% { transform: translateY(-120px) translateX(40px) rotate(360deg); opacity: 0; }
+        }
+        .particle {
+          position: absolute;
+          background: radial-gradient(circle, rgba(204,164,59,0.4) 0%, rgba(204,164,59,0) 70%);
+          border-radius: 50%;
+          pointer-events: none;
+          mix-blend-mode: screen;
+        }
       `}} />
 
       {/* Analog Film Grain Compositor Mask */}
@@ -438,12 +454,39 @@ export default function Page() {
         }}
       />
 
-      {/* 3D CANVAS BASE BACKDROP */}
+      {/* 3D VOLUMETRIC BACKGROUND ENGINE */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-1000" 
         style={{ zIndex: 1 }} 
       />
+
+      {/* VOLUMETRIC PARTICULATE LAYER */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-[2]">
+        <div className="particle w-[6px] h-[6px]" style={{ top: '20%', left: '15%', animation: 'drift 14s infinite linear' }} />
+        <div className="particle w-[8px] h-[8px]" style={{ top: '65%', left: '80%', animation: 'drift 18s infinite linear', animationDelay: '2s' }} />
+        <div className="particle w-[4px] h-[4px]" style={{ top: '45%', left: '45%', animation: 'drift 12s infinite linear', animationDelay: '5s' }} />
+        <div className="particle w-[7px] h-[7px]" style={{ top: '80%', left: '25%', animation: 'drift 16s infinite linear', animationDelay: '1s' }} />
+        <div className="particle w-[5px] h-[5px]" style={{ top: '10%', left: '70%', animation: 'drift 15s infinite linear', animationDelay: '4s' }} />
+      </div>
+
+      {/* COGNITIVE TELEMETRY PANEL (TOP LEFT) */}
+      <div className="fixed top-24 left-6 z-[99] hidden lg:flex flex-col gap-1 font-mono text-[9px] tracking-[0.2em] text-white/40 uppercase pointer-events-none select-none mix-blend-difference">
+        <div className="flex items-center gap-2">
+          <span className="w-1 h-1 bg-[#cca43b] rounded-full animate-pulse" />
+          <span>Profile: HNW_DETECTED</span>
+        </div>
+        <div>OPTIMIZATION: RESTRICTION_MODE_ALPHA</div>
+      </div>
+
+      {/* PREDICTIVE BEHAVIOR PATHING PANEL (TOP RIGHT) */}
+      <div className="fixed top-24 right-6 z-[99] hidden lg:flex flex-col items-end gap-1 font-mono text-[9px] tracking-[0.2em] text-white/40 uppercase pointer-events-none select-none mix-blend-difference">
+        <div>Intent Map: Private_Intake_Prefetched</div>
+        <div className="flex items-center gap-2">
+          <span>Sonic Haptics: Active</span>
+          <div className={`w-3 h-[2px] bg-[#cca43b] transition-all duration-150 ${sonicWaveActive ? 'scale-x-150 opacity-100' : 'scale-x-100 opacity-40'}`} />
+        </div>
+      </div>
 
       <div className="relative z-10">
         <Cursor />
