@@ -91,7 +91,7 @@ export default function Page() {
 
     async function init() {
       try {
-        // PILLAR 2: Concurrent Batch script optimization
+        // PILLAR 2: Concurrent Batch script asset optimization
         await Promise.all([
           loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
@@ -105,7 +105,7 @@ export default function Page() {
           loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
         ])
       } catch (err) {
-        console.log("[v0] Core script loading optimization error:", (err as Error).message)
+        console.log("[v0] Engine initialization error:", (err as Error).message)
         revealFallback()
         return
       }
@@ -308,7 +308,7 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
-      {/* GLOBAL LUXURY MECHANICAL ENGINE OVERRIDES */}
+      {/* GLOBAL LUXURY ENGINE OVERRIDES SHEET */}
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           background-color: #0A0A0A !important;
@@ -316,7 +316,17 @@ export default function Page() {
           -webkit-font-smoothing: antialiased !important;
         }
 
-        /* PILLAR 1: BOLD LUXURY WHITESPACE INJECTION */
+        /* PILLAR 3: CINEMATIC MEDIA COLOR GRADING CONTROLS */
+        main img, main video, [style*="background-image"] {
+          filter: contrast(1.10) brightness(0.90) saturate(0.82) sepia(0.03) !important;
+          transition: filter 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1) !important;
+          border-radius: 2px !important; /* Premium precise straight-cut edges */
+        }
+        main img:hover, main video:hover {
+          filter: contrast(1.14) brightness(0.96) saturate(0.88) sepia(0.01) !important;
+        }
+
+        /* PILLAR 1: BOLD WHITESPACE INJECTION */
         main section {
           padding-top: 14rem !important;
           padding-bottom: 14rem !important;
@@ -351,10 +361,10 @@ export default function Page() {
         main p {
           letter-spacing: 0.05em !important;
           line-height: 1.9 !important;
-          max-width: 40rem !important; /* Forces premium reading tracking dimensions */
+          max-width: 40rem !important;
         }
 
-        /* Global High-Contrast Diamond White Typography Controls */
+        /* Global Diamond White Typography Controls */
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
         }
@@ -375,7 +385,17 @@ export default function Page() {
         }
       `}} />
 
-      {/* 3D BACKGROUND LAYER */}
+      {/* PILLAR 3: MATHEMATICAL ANALOG FILM GRAIN COMPOSITOR FILTER */}
+      <div 
+        className="fixed inset-0 w-full h-full pointer-events-none select-none" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          opacity: 0.015,
+          zIndex: 9999
+        }}
+      />
+
+      {/* 3D CANVAS BASE BACKDROP */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-1000" 
