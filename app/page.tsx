@@ -75,6 +75,40 @@ function loadScript(src: string): Promise<void> {
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
   const lenisRef = useRef<any>(null)
+  const audioCtxRef = useRef<AudioContext | null>(null)
+
+  // Pure Code-Synthesized Mechanical Haptic Tick (Zero Asset Overhead)
+  const playMechanicalTick = (isClick = false) => {
+    try {
+      if (!audioCtxRef.current) {
+        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)()
+      }
+      
+      const ctx = audioCtxRef.current
+      if (ctx.state === "suspended") {
+        ctx.resume()
+      }
+
+      const osc = ctx.createOscillator()
+      const gainNode = ctx.createGain()
+
+      osc.type = "sine"
+      // Click is a deeper mechanical sound, hover is a precision high-frequency tick
+      osc.frequency.setValueAtTime(isClick ? 800 : 1600, ctx.currentTime)
+      osc.frequency.exponentialRampToValueAtTime(isClick ? 150 : 400, ctx.currentTime + 0.015)
+
+      gainNode.gain.setValueAtTime(isClick ? 0.06 : 0.018, ctx.currentTime)
+      gainNode.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.015)
+
+      osc.connect(gainNode)
+      gainNode.connect(ctx.destination)
+
+      osc.start()
+      osc.stop(ctx.currentTime + 0.016)
+    } catch (e) {
+      // Audio fallback silent to avoid throwing errors before user gesture
+    }
+  }
 
   useEffect(() => {
     let vantaEffect: any = null
@@ -86,12 +120,13 @@ export default function Page() {
       document.querySelectorAll<HTMLElement>(".reveal").forEach((el) => {
         el.style.opacity = "1"
         el.style.transform = "none"
+        el.style.clipPath = "none"
       })
     }
 
     async function init() {
       try {
-        // PILLAR 2: Concurrent Batch Script Processing
+        // PILLAR 2: Fast Parallel Asset Processing
         await Promise.all([
           loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
@@ -105,7 +140,7 @@ export default function Page() {
           loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
         ])
       } catch (err) {
-        console.log("[v0] Layout engine script skip:", (err as Error).message)
+        console.log("[v0] Core system bypass:", (err as Error).message)
         revealFallback()
         return
       }
@@ -114,7 +149,7 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- Smooth Scroll Engine ---
+      // --- Smooth Scroll Architecture ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
@@ -150,38 +185,49 @@ export default function Page() {
         document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- Typography & Interaction Fields ---
+      // --- Spatial Layout Animations & Premium Sound Mapping ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
+        // Kinetic Aperture/Shutter Reveal on Section elements
         const items = gsap.utils.toArray<HTMLElement>(".reveal")
         items.forEach((el: HTMLElement) => {
-          gsap.to(el, {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "power4.out",
-            scrollTrigger: { trigger: el, start: "top 90%" },
-          })
+          gsap.fromTo(el, 
+            { opacity: 0, y: 30, clipPath: "inset(40% 0% 40% 0%)" },
+            {
+              opacity: 1,
+              y: 0,
+              clipPath: "inset(0% 0% 0% 0%)",
+              duration: 1.4,
+              ease: "power4.inOut",
+              scrollTrigger: { trigger: el, start: "top 88%" },
+            }
+          )
         })
 
         const headers = gsap.utils.toArray<HTMLElement>(".split-words")
         headers.forEach((el: HTMLElement) => {
           const words = splitIntoWords(el)
-          gsap.set(words, { yPercent: 130, rotate: 2 })
+          gsap.set(words, { yPercent: 130, rotate: 1 })
           gsap.to(words, {
             yPercent: 0,
             rotate: 0,
-            duration: 1.1,
+            duration: 1.2,
             ease: "power4.out",
-            stagger: 0.06,
+            stagger: 0.05,
             scrollTrigger: { trigger: el, start: "top 85%" },
           })
         })
 
-        // Interactive Button Magnetics
-        const interactiveTargets = document.querySelectorAll("button, a, [role='button']")
+        // Interactive Elements: Magnetic Grids + Mechanical Audio Bindings
+        const interactiveTargets = document.querySelectorAll("button, a, [role='button'], .nav-link-item")
         interactiveTargets.forEach((btn: any) => {
+          
+          // Inject Sonic Haptics
+          btn.addEventListener("mouseenter", () => playMechanicalTick(false))
+          btn.addEventListener("click", () => playMechanicalTick(true))
+
+          // Premium Smooth Magnetics
           btn.addEventListener("mousemove", (e: MouseEvent) => {
             const bounds = btn.getBoundingClientRect()
             const mouseX = e.clientX - bounds.left - bounds.width / 2
@@ -201,13 +247,13 @@ export default function Page() {
               x: 0,
               y: 0,
               scale: 1,
-              duration: 0.6,
+              duration: 0.5,
               ease: "elastic.out(1.1, 0.4)"
             })
           })
         })
 
-        // Luxury Copy Mutations
+        // Luxury Nomenclature Shifts
         document.querySelectorAll("button, a, span, h2, sub").forEach((el: any) => {
           if (!el.children.length && el.textContent) {
             const txt = el.textContent.trim()
@@ -226,7 +272,7 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- Initialize Vanta Topology ---
+      // --- Initialize Vanta Backdrop ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -243,7 +289,7 @@ export default function Page() {
         })
         
         const canvasEl = document.getElementById("vanta-canvas")
-        if (canvasEl) canvasEl.style.opacity = "0.45" // Dimmed slightly for pristine text legibility
+        if (canvasEl) canvasEl.style.opacity = "0.45"
       }
     }
 
@@ -264,7 +310,7 @@ export default function Page() {
     }
   }, [])
 
-  // Heavy Vacuum-Sealed Modal Sequences
+  // Heavy Vacuum-Sealed Modal Sequence
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
@@ -303,8 +349,14 @@ export default function Page() {
     }
   }, [isOpen])
 
-  const open = () => setIsOpen(true)
-  const close = () => setIsOpen(false)
+  const open = () => {
+    playMechanicalTick(true)
+    setIsOpen(true)
+  }
+  const close = () => {
+    playMechanicalTick(true)
+    setIsOpen(false)
+  }
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
@@ -316,13 +368,13 @@ export default function Page() {
           -webkit-font-smoothing: antialiased !important;
         }
 
-        /* PILLAR 3: Cinematic Media Treatements */
+        /* Cinematic Media Treatements */
         main img, main video, [style*="background-image"] {
           filter: contrast(1.08) brightness(0.88) saturate(0.85) !important;
           border-radius: 2px !important;
         }
 
-        /* Generous Premium Vertical Breathing Room */
+        /* Generous Symmetrical Breathing Room */
         main section {
           padding-top: 12rem !important;
           padding-bottom: 12rem !important;
@@ -335,18 +387,12 @@ export default function Page() {
           backface-visibility: hidden;
         }
 
-        /* PRESERVE CENTERING BALANCE */
         main section > div {
           width: 100% !important;
           max-width: 1200px !important;
           margin-left: auto !important;
           margin-right: auto !important;
           text-align: center !important;
-        }
-
-        /* Clean alignment patches for lists and content grids */
-        main section max-w-4xl, main section .grid {
-          text-align: left !important;
         }
 
         main h1, main h2 {
@@ -382,7 +428,7 @@ export default function Page() {
         }
       `}} />
 
-      {/* PILLAR 3: Mathematical Analog Film Grain */}
+      {/* Analog Film Grain Compositor Mask */}
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none select-none" 
         style={{
