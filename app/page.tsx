@@ -10,7 +10,6 @@ import { Footprint } from "@/components/salon/footprint"
 import { BookingModal } from "@/components/salon/booking-modal"
 import { Cursor } from "@/components/salon/cursor"
 
-// Minimal typings for the CDN globals attached to window
 declare global {
   interface Window {
     Lenis?: any
@@ -107,24 +106,22 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- 1. Premium Smooth Scroll & Anchor Tracking ---
+      // --- 1. Smooth Scroll Engine & Velocity Modulation ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
         const raf = (time: number) => {
           lenis.raf(time)
-          
           if (vantaEffect && vantaEffect.options) {
             const velocity = Math.abs(lenis.velocity || 0)
             vantaEffect.options.scale = 1.0 + Math.min(velocity * 0.04, 0.25)
           }
-          
           rafId = requestAnimationFrame(raf)
         }
         rafId = requestAnimationFrame(raf)
         if (ScrollTrigger) lenis.on("scroll", ScrollTrigger.update)
 
-        // Micro-Upgrade: Global Cinematic Smooth Scroll Routing
+        // Cinematic Navigation Anchor Gliding
         globalScrollHandler = (e: MouseEvent) => {
           const target = e.target as HTMLElement
           const anchor = target.closest("a")
@@ -146,7 +143,7 @@ export default function Page() {
         document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- 2. Animations & Layout Interactions ---
+      // --- 2. Kinetic Spatial Typography Reveals ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -175,7 +172,7 @@ export default function Page() {
           })
         })
 
-        // Magnetic Button Mechanics
+        // Magnetic Hover Fields (Tactile Button Mass)
         const interactiveTargets = document.querySelectorAll("button, a, [role='button']")
         interactiveTargets.forEach((btn: any) => {
           btn.addEventListener("mousemove", (e: MouseEvent) => {
@@ -203,7 +200,7 @@ export default function Page() {
           })
         })
 
-        // Real-Time Luxury Copywriting Mutation Engine
+        // Luxury Copy Mutations
         document.querySelectorAll("button, a, span, h2, sub").forEach((el: any) => {
           if (!el.children.length && el.textContent) {
             const txt = el.textContent.trim()
@@ -222,7 +219,7 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- 3. Initialize Vanta Topology ---
+      // --- 3. Hardware-Accelerated Generative Mesh ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -245,9 +242,7 @@ export default function Page() {
     return () => {
       cancelled = true
       if (rafId) cancelAnimationFrame(rafId)
-      if (globalScrollHandler) {
-        document.removeEventListener("click", globalScrollHandler)
-      }
+      if (globalScrollHandler) document.removeEventListener("click", globalScrollHandler)
       if (vantaEffect) {
         try { vantaEffect.destroy() } catch {}
       }
@@ -255,17 +250,46 @@ export default function Page() {
         try { lenisRef.current.destroy() } catch {}
         lenisRef.current = null
       }
-      if (window.ScrollTrigger) {
-        window.ScrollTrigger.getAll().forEach((t: any) => t.kill())
-      }
+      if (window.ScrollTrigger) window.ScrollTrigger.getAll().forEach((t: any) => t.kill())
     }
   }, [])
 
+  // --- Pillar 4 Integration: Heavy Vacuum-Sealed Modal Sequences ---
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
       lenis?.stop()
       document.body.style.overflow = "hidden"
+      
+      // Delay slightly to give Next.js/React layout cycles a frame to inject the elements
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          // Robust multi-tier targeting vectors for V0 generated modal configurations
+          const modalOverlay = document.querySelector('div[class*="backdrop-blur"], div[class*="fixed inset-0 bg-black/"]') as HTMLElement
+          const modalBox = document.querySelector('div[role="dialog"], div[class*="bg-background"][class*="fixed"]') as HTMLElement
+          
+          if (window.gsap) {
+            const tl = window.gsap.timeline()
+            
+            if (modalOverlay) {
+              // Smooth heavy backdrop filter saturation
+              tl.fromTo(modalOverlay, 
+                { opacity: 0, backdropFilter: "blur(0px)" },
+                { opacity: 1, backdropFilter: "blur(24px)", backgroundColor: "rgba(0,0,0,0.75)", duration: 0.6, ease: "power3.out" }
+              )
+            }
+            
+            if (modalBox) {
+              // Elevate the container block using complex kinematic damping curves
+              tl.fromTo(modalBox,
+                { opacity: 0, scale: 0.93, y: 50, transformOrigin: "center center" },
+                { opacity: 1, scale: 1, y: 0, duration: 0.85, ease: "power4.out" },
+                "-=0.45" // Interlock timelines for a fluid transition merge
+              )
+            }
+          }
+        }, 40)
+      })
     } else {
       lenis?.start()
       document.body.style.overflow = ""
@@ -280,16 +304,14 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
-      {/* NATIVE FORCE-INJECTOR SHEET FOR DIAMOND WHITE TYPOGRAPHY & PERSISTENT BACKGROUNDS */}
+      {/* HIGH-CONTRAST DIAMOND WHITE TYPOGRAPHY INJECTOR RULES */}
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           background-color: #0A0A0A !important;
         }
-        /* Lock down pure diamond white text globally across sub-components, paragraphs, and list blocks */
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
         }
-        /* Keep target geometric styling headers or outline branding variables pristine gold */
         .text-primary, [class*="text-gold"], .split-words, [style*="color: rgb(204"] {
           color: #cca43b !important;
         }
@@ -297,16 +319,25 @@ export default function Page() {
           -webkit-text-stroke: 1px #cca43b !important;
           color: transparent !important;
         }
+        /* Heavy branding styling injection overrides for inputs and input panels */
+        input, select, textarea {
+          background-color: rgba(255,255,255,0.03) !important;
+          border: 1px solid rgba(204,164,59,0.2) !important;
+          color: #ffffff !important;
+        }
+        div[role="dialog"] h2, div[role="dialog"] p {
+          color: #ffffff !important;
+        }
       `}} />
 
-      {/* 3D CANVAS BACKGROUND LAYER (Perfectly layered above deep canvas backdrop, safely below content) */}
+      {/* 3D CANVAS BASE LAYER */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full pointer-events-none" 
         style={{ zIndex: 1 }} 
       />
 
-      {/* COMPONENT INTERACTION CONTAINER (Set high at z-10 for total input accessibility) */}
+      {/* COMPONENT FOREGROUND VIEWPORT CONTAINER */}
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={open} />
