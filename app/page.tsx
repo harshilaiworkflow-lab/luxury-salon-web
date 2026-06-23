@@ -91,13 +91,23 @@ export default function Page() {
 
     async function init() {
       try {
-        await loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js")
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js")
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js")
-        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js")
-        await loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
+        // PILLAR 2: Asynchronous Batch Processing (Shatters script loading waterfalls)
+        // Group 1: Core standalone libraries download concurrently
+        await Promise.all([
+          loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js")
+        ])
+
+        if (cancelled) return
+
+        // Group 2: Plugins dependent on window engines execute in parallel right behind them
+        await Promise.all([
+          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"),
+          loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
+        ])
       } catch (err) {
-        console.log("[v0] CDN script load failed:", (err as Error).message)
+        console.log("[v0] High-performance asset batching dropped:", (err as Error).message)
         revealFallback()
         return
       }
@@ -106,7 +116,7 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- 1. Smooth Scroll Engine & Velocity Modulation ---
+      // --- Smooth Scroll Engine & Velocity Modulation ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
@@ -121,7 +131,6 @@ export default function Page() {
         rafId = requestAnimationFrame(raf)
         if (ScrollTrigger) lenis.on("scroll", ScrollTrigger.update)
 
-        // Cinematic Navigation Anchor Gliding
         globalScrollHandler = (e: MouseEvent) => {
           const target = e.target as HTMLElement
           const anchor = target.closest("a")
@@ -143,7 +152,7 @@ export default function Page() {
         document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- 2. Kinetic Spatial Typography Reveals ---
+      // --- Kinetic Spatial Typography Reveals ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -172,7 +181,7 @@ export default function Page() {
           })
         })
 
-        // Magnetic Hover Fields (Tactile Button Mass)
+        // Magnetic Hover Fields
         const interactiveTargets = document.querySelectorAll("button, a, [role='button']")
         interactiveTargets.forEach((btn: any) => {
           btn.addEventListener("mousemove", (e: MouseEvent) => {
@@ -219,7 +228,7 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- 3. Hardware-Accelerated Generative Mesh ---
+      // --- Initialize Vanta Topology ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -234,6 +243,10 @@ export default function Page() {
           backgroundColor: 0x0a0a0a, 
           color: 0xcca43b,           
         })
+        
+        // Let the 3D surface fade onto the screen smoothly to avoid pop-in shifts
+        const canvasEl = document.getElementById("vanta-canvas")
+        if (canvasEl) canvasEl.style.opacity = "1"
       }
     }
 
@@ -254,37 +267,31 @@ export default function Page() {
     }
   }, [])
 
-  // --- Pillar 4 Integration: Heavy Vacuum-Sealed Modal Sequences ---
+  // Heavy Vacuum-Sealed Modal Sequences
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
       lenis?.stop()
       document.body.style.overflow = "hidden"
       
-      // Delay slightly to give Next.js/React layout cycles a frame to inject the elements
       requestAnimationFrame(() => {
         setTimeout(() => {
-          // Robust multi-tier targeting vectors for V0 generated modal configurations
           const modalOverlay = document.querySelector('div[class*="backdrop-blur"], div[class*="fixed inset-0 bg-black/"]') as HTMLElement
           const modalBox = document.querySelector('div[role="dialog"], div[class*="bg-background"][class*="fixed"]') as HTMLElement
           
           if (window.gsap) {
             const tl = window.gsap.timeline()
-            
             if (modalOverlay) {
-              // Smooth heavy backdrop filter saturation
               tl.fromTo(modalOverlay, 
                 { opacity: 0, backdropFilter: "blur(0px)" },
                 { opacity: 1, backdropFilter: "blur(24px)", backgroundColor: "rgba(0,0,0,0.75)", duration: 0.6, ease: "power3.out" }
               )
             }
-            
             if (modalBox) {
-              // Elevate the container block using complex kinematic damping curves
               tl.fromTo(modalBox,
                 { opacity: 0, scale: 0.93, y: 50, transformOrigin: "center center" },
                 { opacity: 1, scale: 1, y: 0, duration: 0.85, ease: "power4.out" },
-                "-=0.45" // Interlock timelines for a fluid transition merge
+                "-=0.45"
               )
             }
           }
@@ -304,10 +311,18 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
-      {/* HIGH-CONTRAST DIAMOND WHITE TYPOGRAPHY INJECTOR RULES */}
+      {/* PILLAR 2: CSS Rendering Layer Optimization Overrides */}
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           background-color: #0A0A0A !important;
+          text-rendering: optimizeLegibility !important;
+          -webkit-font-smoothing: antialiased !important;
+        }
+        /* Optimize multi-tier rendering layout calculations */
+        main section {
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          perspective: 1000px;
         }
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
@@ -319,7 +334,6 @@ export default function Page() {
           -webkit-text-stroke: 1px #cca43b !important;
           color: transparent !important;
         }
-        /* Heavy branding styling injection overrides for inputs and input panels */
         input, select, textarea {
           background-color: rgba(255,255,255,0.03) !important;
           border: 1px solid rgba(204,164,59,0.2) !important;
@@ -330,14 +344,13 @@ export default function Page() {
         }
       `}} />
 
-      {/* 3D CANVAS BASE LAYER */}
+      {/* 3D CANVAS BACKGROUND LAYER (With initial absolute zero opacity for fluid fade-in execution) */}
       <div 
         id="vanta-canvas" 
-        className="fixed inset-0 w-full h-full pointer-events-none" 
+        className="fixed inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-1000" 
         style={{ zIndex: 1 }} 
       />
 
-      {/* COMPONENT FOREGROUND VIEWPORT CONTAINER */}
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={open} />
