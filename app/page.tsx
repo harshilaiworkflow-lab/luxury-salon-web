@@ -20,15 +20,16 @@ declare global {
   }
 }
 
-// PREMIUM IMAGE REGISTRY - ROUTED DIRECTLY TO YOUR PUBLIC ASSETS
+// PREMIUM IMAGE REGISTRY - UPDATED WITH THE EXACT UPLOADED EXTENSIONS
 const SALON_IMAGES = {
   heroBackdrop: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
-  manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
+  manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.avif", // Fixed to .avif
   collectionHair: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
-  collectionBeard: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
+  collectionBeard: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.avif",   // Fixed to .avif
   collectionAtmosphere: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
-  footprintBasin: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp"
+  footprintBasin: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.avif"     // Fixed to .avif
 }
+
 
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
   if (el.dataset.split === "true") {
