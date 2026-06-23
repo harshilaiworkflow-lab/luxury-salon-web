@@ -91,7 +91,7 @@ export default function Page() {
 
     async function init() {
       try {
-        // PILLAR 2: Concurrent Batch script asset optimization
+        // PILLAR 2: Concurrent Batch Script Processing
         await Promise.all([
           loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
@@ -105,7 +105,7 @@ export default function Page() {
           loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
         ])
       } catch (err) {
-        console.log("[v0] Engine initialization error:", (err as Error).message)
+        console.log("[v0] Layout engine script skip:", (err as Error).message)
         revealFallback()
         return
       }
@@ -114,7 +114,7 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- Smooth Scroll Engine & Cinematic Anchor Gliding ---
+      // --- Smooth Scroll Engine ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
@@ -139,7 +139,7 @@ export default function Page() {
               const targetSection = document.querySelector(href)
               if (targetSection) {
                 lenis.scrollTo(targetSection, {
-                  offset: -40,
+                  offset: -20,
                   duration: 1.6,
                   immediate: false
                 })
@@ -150,7 +150,7 @@ export default function Page() {
         document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- Spatial Typography & Magnetic Field Interactions ---
+      // --- Typography & Interaction Fields ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -243,7 +243,7 @@ export default function Page() {
         })
         
         const canvasEl = document.getElementById("vanta-canvas")
-        if (canvasEl) canvasEl.style.opacity = "1"
+        if (canvasEl) canvasEl.style.opacity = "0.45" // Dimmed slightly for pristine text legibility
       }
     }
 
@@ -264,7 +264,7 @@ export default function Page() {
     }
   }, [])
 
-  // PILLAR 4: Heavy Vacuum-Sealed Modal Sequences
+  // Heavy Vacuum-Sealed Modal Sequences
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
@@ -308,7 +308,7 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
-      {/* GLOBAL LUXURY ENGINE OVERRIDES SHEET */}
+      {/* GLOBAL LUXURY ENGINE SHEET */}
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           background-color: #0A0A0A !important;
@@ -316,55 +316,52 @@ export default function Page() {
           -webkit-font-smoothing: antialiased !important;
         }
 
-        /* PILLAR 3: CINEMATIC MEDIA COLOR GRADING CONTROLS */
+        /* PILLAR 3: Cinematic Media Treatements */
         main img, main video, [style*="background-image"] {
-          filter: contrast(1.10) brightness(0.90) saturate(0.82) sepia(0.03) !important;
-          transition: filter 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1) !important;
-          border-radius: 2px !important; /* Premium precise straight-cut edges */
-        }
-        main img:hover, main video:hover {
-          filter: contrast(1.14) brightness(0.96) saturate(0.88) sepia(0.01) !important;
+          filter: contrast(1.08) brightness(0.88) saturate(0.85) !important;
+          border-radius: 2px !important;
         }
 
-        /* PILLAR 1: BOLD WHITESPACE INJECTION */
+        /* Generous Premium Vertical Breathing Room */
         main section {
-          padding-top: 14rem !important;
-          padding-bottom: 14rem !important;
+          padding-top: 12rem !important;
+          padding-bottom: 12rem !important;
           min-height: 95vh !important;
           display: flex !important;
           flex-direction: column !important;
           justify-content: center !important;
+          align-items: center !important;
           transform: translateZ(0);
           backface-visibility: hidden;
         }
 
-        /* PILLAR 1: ASYMMETRIC EDITORIAL LAYOUT MATRIX */
-        main section:nth-of-type(odd) > div {
-          max-width: 68% !important;
-          margin-left: 6% !important;
-          margin-right: auto !important;
-          text-align: left !important;
-        }
-        main section:nth-of-type(even) > div {
-          max-width: 68% !important;
+        /* PRESERVE CENTERING BALANCE */
+        main section > div {
+          width: 100% !important;
+          max-width: 1200px !important;
           margin-left: auto !important;
-          margin-right: 8% !important;
+          margin-right: auto !important;
+          text-align: center !important;
+        }
+
+        /* Clean alignment patches for lists and content grids */
+        main section max-w-4xl, main section .grid {
           text-align: left !important;
         }
 
-        /* Premium Editorial Typography Metrics */
         main h1, main h2 {
           letter-spacing: 0.14em !important;
           line-height: 1.25 !important;
-          margin-bottom: 4rem !important;
         }
+        
         main p {
           letter-spacing: 0.05em !important;
           line-height: 1.9 !important;
-          max-width: 40rem !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
         }
 
-        /* Global Diamond White Typography Controls */
+        /* High-Contrast Diamond White Overrides */
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
         }
@@ -385,12 +382,12 @@ export default function Page() {
         }
       `}} />
 
-      {/* PILLAR 3: MATHEMATICAL ANALOG FILM GRAIN COMPOSITOR FILTER */}
+      {/* PILLAR 3: Mathematical Analog Film Grain */}
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none select-none" 
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          opacity: 0.015,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          opacity: 0.012,
           zIndex: 9999
         }}
       />
