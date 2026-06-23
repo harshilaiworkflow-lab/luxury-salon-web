@@ -9,6 +9,7 @@ import { Membership } from "@/components/salon/membership"
 import { Footprint } from "@/components/salon/footprint"
 import { BookingModal } from "@/components/salon/booking-modal"
 import { Cursor } from "@/components/salon/cursor"
+import VantaBackground from "@/components/vanta-background"
 
 declare global {
   interface Window {
@@ -18,7 +19,7 @@ declare global {
   }
 }
 
-// COMPLETE PREMIUM CONTENT REGISTRY (LOCAL WEBP PATHS)
+// THE GOATED CONTENT REGISTRY (CORRECT WEBP PATHS MATCHING YOUR PUBLIC FOLDER)
 const SALON_IMAGES = {
   heroBackdrop: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
   manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
@@ -31,7 +32,6 @@ const SALON_IMAGES = {
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
   const lenisRef = useRef<any>(null)
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const audioCtxRef = useRef<AudioContext | null>(null)
 
   // Pure Code-Synthesized Tactile Mechanical Click Sound Effects
@@ -65,58 +65,6 @@ export default function Page() {
     let rafId = 0
     let cancelled = false
 
-    // --- HIGH-PERFORMANCE LUXURY FLOWING GOLDEN WAVES LOGIC ---
-    const canvas = canvasRef.current
-    if (canvas) {
-      const ctx = canvas.getContext("2d")
-      if (ctx) {
-        let animationFrameId: number
-        let phase = 0
-
-        const resizeCanvas = () => {
-          canvas.width = window.innerWidth
-          canvas.height = window.innerHeight
-        }
-        window.addEventListener("resize", resizeCanvas)
-        resizeCanvas()
-
-        const drawWaves = () => {
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-          phase += 0.003 // Controls the slow, luxurious speed of the flowing waves
-
-          // Render 3 distinct overlapping fluid layers
-          for (let l = 0; l < 3; l++) {
-            ctx.beginPath()
-            ctx.lineWidth = l === 0 ? 1.5 : 0.8
-            
-            // Premium Brand Asset Color Interpolation (#C17F53) with micro-opacities
-            const alpha = l === 0 ? 0.12 : l === 1 ? 0.06 : 0.03
-            ctx.strokeStyle = `rgba(193, 127, 83, ${alpha})`
-
-            for (let x = 0; x < canvas.width; x += 2) {
-              // Mathematical sine formula creating sophisticated organic flowing paths
-              const y = 
-                canvas.height * 0.55 +
-                Math.sin(x * 0.002 + phase + l * 1.5) * 70 * Math.sin(phase * 0.5) +
-                Math.cos(x * 0.001 - phase * 0.8 + l) * 40
-              
-              if (x === 0) ctx.moveTo(x, y)
-              else ctx.lineTo(x, y)
-            }
-            ctx.stroke()
-          }
-          animationFrameId = requestAnimationFrame(drawWaves)
-        }
-        drawWaves()
-
-        return () => {
-          cancelAnimationFrame(animationFrameId)
-          window.removeEventListener("resize", resizeCanvas)
-        }
-      }
-    }
-
-    // --- SCRIPT LOADER & SMOOTH INTERACTIVITY ---
     const loadScript = (src: string): Promise<void> => {
       return new Promise((resolve, reject) => {
         if (document.querySelector(`script[src="${src}"]`)) return resolve()
@@ -188,93 +136,14 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0D0D0C] text-[#F4F4F0] select-none overflow-x-hidden">
-      {/* ARCHITECTURAL LUXURY GLOBAL LOOK & FEEL INTERPOLATION */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        html, body {
-          background-color: #0D0D0C !important;
-          color: #F4F4F0 !important;
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        main section {
-          padding-top: 10rem !important;
-          padding-bottom: 10rem !important;
-          border-bottom: 1px solid rgba(193, 127, 83, 0.08);
-          position: relative;
-        }
-
-        /* High-Contrast Luxury Print Filters with Automatic Asset Fallbacks */
-        main img, main video {
-          filter: grayscale(0.12) contrast(1.08) brightness(0.85) !important;
-          border: 1px solid rgba(193, 127, 83, 0.15) !important;
-          box-shadow: 0 20px 45px rgba(0,0,0,0.6);
-          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-          background: linear-gradient(135deg, #141412 0%, #211A14 50%, #1A130E 100%) !important;
-        }
-        main img:hover {
-          transform: scale(1.02);
-        }
-
-        main h1, main h2 {
-          font-family: "Playfair Display", "Didot", "Bodoni MT", serif !important;
-          font-weight: 300 !important;
-          letter-spacing: -0.01em !important;
-          color: #F4F4F0 !important;
-        }
-
-        .text-primary, [class*="text-gold"], .font-outline {
-          color: #C17F53 !important;
-        }
-        
-        .border-primary, [class*="border-gold"] {
-          border-color: rgba(193, 127, 83, 0.4) !important;
-        }
-
-        button, .btn-prime {
-          background-color: transparent !important;
-          border: 1px solid rgba(193, 127, 83, 0.3) !important;
-          color: #F4F4F0 !important;
-          text-transform: uppercase !important;
-          letter-spacing: 0.15em !important;
-          font-size: 11px !important;
-          padding: 1rem 2.5rem !important;
-          transition: all 0.4s ease !important;
-        }
-        button:hover {
-          background-color: #C17F53 !important;
-          color: #0D0D0C !important;
-          border-color: #C17F53 !important;
-        }
-      `}} />
-
-      {/* Dynamic Fluid Golden Wave Layer Canvas */}
-      <canvas 
-        ref={canvasRef} 
-        className="fixed inset-0 w-full h-full pointer-events-none z-[2]"
-      />
-
-      {/* Luxury Tactile Fine-Linen Surface Film */}
-      <div 
-        className="fixed inset-0 w-full h-full pointer-events-none select-none z-[999]" 
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.012'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Premium Interior Ambient Warm Lighting Profiles */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none z-[1] opacity-35">
-        <div className="absolute top-[-10%] left-[-20%] w-[60vw] h-[60vw] rounded-full bg-radial from-[#C17F53]/10 to-transparent blur-[120px]" />
-        <div className="absolute bottom-[20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-radial from-[#8C7A6B]/10 to-transparent blur-[100px]" />
-      </div>
+      {/* Restored Golden Flowing Lines Animated Component */}
+      <VantaBackground />
 
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={() => setIsOpen(true)} />
         
         <Hero onBook={() => setIsOpen(true)} image={SALON_IMAGES.heroBackdrop} />
-        
-        <div className="w-full max-w-6xl mx-auto px-4 my-8 h-[1px] bg-gradient-to-r from-transparent via-[#C17F53]/20 to-transparent" />
-        
         <Manifesto image={SALON_IMAGES.manifestoInterior} />
         <Collections images={[SALON_IMAGES.collectionHair, SALON_IMAGES.collectionBeard, SALON_IMAGES.collectionAtmosphere]} />
         <Membership />
