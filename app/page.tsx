@@ -480,29 +480,10 @@ export default function Page() {
         <div className="particle w-[5px] h-[5px]" style={{ top: '10%', left: '70%', animation: 'drift 15s infinite linear', animationDelay: '4s' }} />
       </div>
 
-      {/* COGNITIVE TELEMETRY PANEL (TOP LEFT) */}
-      <div className="fixed top-24 left-6 z-[99] hidden lg:flex flex-col gap-1 font-mono text-[9px] tracking-[0.2em] text-white/40 uppercase pointer-events-none select-none mix-blend-difference">
-        <div className="flex items-center gap-2">
-          <span className="w-1 h-1 bg-[#cca43b] rounded-full animate-pulse" />
-          <span>Profile: HNW_DETECTED</span>
-        </div>
-        <div>OPTIMIZATION: RESTRICTION_MODE_ALPHA</div>
-      </div>
-
-      {/* PREDICTIVE BEHAVIOR PATHING PANEL (TOP RIGHT) */}
-      <div className="fixed top-24 right-6 z-[99] hidden lg:flex flex-col items-end gap-1 font-mono text-[9px] tracking-[0.2em] text-white/40 uppercase pointer-events-none select-none mix-blend-difference">
-        <div>Intent Map: Private_Intake_Prefetched</div>
-        <div className="flex items-center gap-2">
-          <span>Sonic Haptics: Active</span>
-          <div className={`w-3 h-[2px] bg-[#cca43b] transition-all duration-150 ${sonicWaveActive ? 'scale-x-150 opacity-100' : 'scale-x-100 opacity-40'}`} />
-        </div>
-      </div>
-
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={open} />
         
-        {/* WEBP SEAMLESSLY PLUGGED DIRECTLY INTO COMPONENT PROPS */}
         <Hero onBook={open} image={SALON_IMAGES.heroBackdrop} />
         <Manifesto image={SALON_IMAGES.manifestoInterior} />
         <Collections images={[SALON_IMAGES.collectionHair, SALON_IMAGES.collectionBeard, SALON_IMAGES.collectionAtmosphere]} />
