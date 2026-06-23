@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-// WORLD-CLASS CONTENT REGISTRY (FULLY UPGRADED TO YOUR WEBP IMAGES)
+// COMPLETE PREMIUM CONTENT REGISTRY (LOCAL WEBP PATHS)
 const SALON_IMAGES = {
   heroBackdrop: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
   manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
@@ -31,6 +31,7 @@ const SALON_IMAGES = {
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
   const lenisRef = useRef<any>(null)
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const audioCtxRef = useRef<AudioContext | null>(null)
 
   // Pure Code-Synthesized Tactile Mechanical Click Sound Effects
@@ -64,6 +65,58 @@ export default function Page() {
     let rafId = 0
     let cancelled = false
 
+    // --- HIGH-PERFORMANCE LUXURY FLOWING GOLDEN WAVES LOGIC ---
+    const canvas = canvasRef.current
+    if (canvas) {
+      const ctx = canvas.getContext("2d")
+      if (ctx) {
+        let animationFrameId: number
+        let phase = 0
+
+        const resizeCanvas = () => {
+          canvas.width = window.innerWidth
+          canvas.height = window.innerHeight
+        }
+        window.addEventListener("resize", resizeCanvas)
+        resizeCanvas()
+
+        const drawWaves = () => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height)
+          phase += 0.003 // Controls the slow, luxurious speed of the flowing waves
+
+          // Render 3 distinct overlapping fluid layers
+          for (let l = 0; l < 3; l++) {
+            ctx.beginPath()
+            ctx.lineWidth = l === 0 ? 1.5 : 0.8
+            
+            // Premium Brand Asset Color Interpolation (#C17F53) with micro-opacities
+            const alpha = l === 0 ? 0.12 : l === 1 ? 0.06 : 0.03
+            ctx.strokeStyle = `rgba(193, 127, 83, ${alpha})`
+
+            for (let x = 0; x < canvas.width; x += 2) {
+              // Mathematical sine formula creating sophisticated organic flowing paths
+              const y = 
+                canvas.height * 0.55 +
+                Math.sin(x * 0.002 + phase + l * 1.5) * 70 * Math.sin(phase * 0.5) +
+                Math.cos(x * 0.001 - phase * 0.8 + l) * 40
+              
+              if (x === 0) ctx.moveTo(x, y)
+              else ctx.lineTo(x, y)
+            }
+            ctx.stroke()
+          }
+          animationFrameId = requestAnimationFrame(drawWaves)
+        }
+        drawWaves()
+
+        return () => {
+          cancelAnimationFrame(animationFrameId)
+          window.removeEventListener("resize", resizeCanvas)
+        }
+      }
+    }
+
+    // --- SCRIPT LOADER & SMOOTH INTERACTIVITY ---
     const loadScript = (src: string): Promise<void> => {
       return new Promise((resolve, reject) => {
         if (document.querySelector(`script[src="${src}"]`)) return resolve()
@@ -104,7 +157,6 @@ export default function Page() {
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
-        // Architectural Smooth Reveal Transitions
         gsap.utils.toArray(".reveal").forEach((el: any) => {
           gsap.fromTo(el, 
             { opacity: 0, y: 40 },
@@ -118,7 +170,6 @@ export default function Page() {
           )
         })
 
-        // Bind Mechanical Tactile Sound Experience to UI Interactions
         document.querySelectorAll("button, a, .nav-link-item").forEach((btn) => {
           btn.addEventListener("mouseenter", () => playMechanicalTick(false))
           btn.addEventListener("click", () => playMechanicalTick(true))
@@ -145,7 +196,6 @@ export default function Page() {
           font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Continuous Structural Layout Grid Spacing */
         main section {
           padding-top: 10rem !important;
           padding-bottom: 10rem !important;
@@ -153,12 +203,13 @@ export default function Page() {
           position: relative;
         }
 
-        /* High-Contrast Luxury Print Filters for Real Salon Photography */
+        /* High-Contrast Luxury Print Filters with Automatic Asset Fallbacks */
         main img, main video {
           filter: grayscale(0.12) contrast(1.08) brightness(0.85) !important;
           border: 1px solid rgba(193, 127, 83, 0.15) !important;
           box-shadow: 0 20px 45px rgba(0,0,0,0.6);
           transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+          background: linear-gradient(135deg, #141412 0%, #211A14 50%, #1A130E 100%) !important;
         }
         main img:hover {
           transform: scale(1.02);
@@ -171,7 +222,6 @@ export default function Page() {
           color: #F4F4F0 !important;
         }
 
-        /* Physical Camel Leather/Brass Aesthetic Highlights */
         .text-primary, [class*="text-gold"], .font-outline {
           color: #C17F53 !important;
         }
@@ -197,6 +247,12 @@ export default function Page() {
         }
       `}} />
 
+      {/* Dynamic Fluid Golden Wave Layer Canvas */}
+      <canvas 
+        ref={canvasRef} 
+        className="fixed inset-0 w-full h-full pointer-events-none z-[2]"
+      />
+
       {/* Luxury Tactile Fine-Linen Surface Film */}
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none select-none z-[999]" 
@@ -215,7 +271,6 @@ export default function Page() {
         <Cursor />
         <Nav onConsult={() => setIsOpen(true)} />
         
-        {/* Dynamic Structural Building Blocks */}
         <Hero onBook={() => setIsOpen(true)} image={SALON_IMAGES.heroBackdrop} />
         
         <div className="w-full max-w-6xl mx-auto px-4 my-8 h-[1px] bg-gradient-to-r from-transparent via-[#C17F53]/20 to-transparent" />
