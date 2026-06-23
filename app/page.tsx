@@ -18,26 +18,16 @@ declare global {
   }
 }
 
-// =========================================================================
-// WORLD-CLASS CONTENT REGISTRY:
-advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg
-// =========================================================================
+// WORLD-CLASS CONTENT REGISTRY
 const SALON_IMAGES = {
-  // 1. The main backdrop for the home hero section (your entrance or styling floor)
-  heroBackdrop: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1600", // Swap this with your Google Maps link!
-
-  // 2. The dual-column Manifesto focus image (the gorgeous brick/stone setup with wooden frames)
-  manifestoInterior: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200", // Swap this with your Google Maps link!
-
-  // 3. Three showcase cards inside the Collections/Services grid (Hair, Grooming, Rituals)
-  collectionHair: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=800",
-  collectionBeard: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800",
-  collectionAtmosphere: "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?q=80&w=800",
-
-  // 4. Footprint block bottom backdrop (the shampoo basin or relaxing gold panels)
-  footprintBasin: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200"
+  // Replace the placeholder text inside the quotes with your real Cloudinary links
+  heroBackdrop: "https://res.cloudinary.com/dwi1wllln/image/upload/f_auto,q_auto/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg_kauulf", 
+  manifestoInterior: "https://res.cloudinary.com/dwi1wllln/image/upload/v1782236545/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg_r4qh9m.avif",
+  collectionHair: "https://res.cloudinary.com/dwi1wllln/image/upload/f_auto,q_auto/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg_kauulf",
+  collectionBeard: "https://res.cloudinary.com/dwi1wllln/image/upload/v1782236545/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg_r4qh9m.avif",
+  collectionAtmosphere: "https://res.cloudinary.com/dwi1wllln/image/upload/f_auto,q_auto/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg_kauulf",
+  footprintBasin: "https://res.cloudinary.com/dwi1wllln/image/upload/v1782236545/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg_r4qh9m.avif"
 }
-
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
   const lenisRef = useRef<any>(null)
