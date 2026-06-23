@@ -54,7 +54,7 @@ export function Manifesto() {
                   parent.innerHTML = `
                     <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center space-y-4">
                       <div className="font-serif italic text-xl text-[#C17F53]/60">Atelier Space</div>
-                      <div className="font-mono text-[9px] tracking-widest text-[#F4F4F0]/30 uppercase">[ Place image_27a33e.jpg Here ]</div>
+                      <div className="font-mono text-[9px] tracking-widest text-[#F4F4F0]/30 uppercase">[ https://content3.jdmagicbox.com/v2/comp/delhi/u7/011pxx11.xx11.130703154845.q9u7/catalogue/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg ]</div>
                     </div>
                   `;
                 }
