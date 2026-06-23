@@ -18,6 +18,26 @@ declare global {
   }
 }
 
+// =========================================================================
+// WORLD-CLASS CONTENT REGISTRY:
+advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg
+// =========================================================================
+const SALON_IMAGES = {
+  // 1. The main backdrop for the home hero section (your entrance or styling floor)
+  heroBackdrop: "https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1600", // Swap this with your Google Maps link!
+
+  // 2. The dual-column Manifesto focus image (the gorgeous brick/stone setup with wooden frames)
+  manifestoInterior: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200", // Swap this with your Google Maps link!
+
+  // 3. Three showcase cards inside the Collections/Services grid (Hair, Grooming, Rituals)
+  collectionHair: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=800",
+  collectionBeard: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?q=80&w=800",
+  collectionAtmosphere: "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?q=80&w=800",
+
+  // 4. Footprint block bottom backdrop (the shampoo basin or relaxing gold panels)
+  footprintBasin: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200"
+}
+
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
   const lenisRef = useRef<any>(null)
@@ -94,7 +114,7 @@ export default function Page() {
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
-        // Clean Architectural Reveal Instead of Matrix Shutter
+        // Architectural Reveal Transitions
         gsap.utils.toArray(".reveal").forEach((el: any) => {
           gsap.fromTo(el, 
             { opacity: 0, y: 40 },
@@ -108,7 +128,7 @@ export default function Page() {
           )
         })
 
-        // Bind Pure Audio Interactions to Buttons & Links
+        // Bind Sound UI
         document.querySelectorAll("button, a, .nav-link-item").forEach((btn) => {
           btn.addEventListener("mouseenter", () => playMechanicalTick(false))
           btn.addEventListener("click", () => playMechanicalTick(true))
@@ -127,16 +147,15 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0D0D0C] text-[#F4F4F0] select-none overflow-x-hidden">
-      {/* ARCHITECTURAL INTERIOR STYLING SHEET */}
+      {/* ARCHITECTURAL DESIGN override SHEET */}
       <style dangerouslySetInnerHTML={{ __html: `
-        /* Soften the background to premium warm charcoal charcoal instead of cold hacker black */
         html, body {
           background-color: #0D0D0C !important;
           color: #F4F4F0 !important;
           font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Architectural layout framing inspired by the salon's vertical slats */
+        /* Continuous Architectural Spacing Metrics */
         main section {
           padding-top: 10rem !important;
           padding-bottom: 10rem !important;
@@ -144,35 +163,33 @@ export default function Page() {
           position: relative;
         }
 
-        /* Style treatment for images to look like high-contrast architectural print magazine photos */
+        /* High-Contrast Print Editorial Filters for Google Photos */
         main img, main video {
-          filter: grayscale(0.2) contrast(1.05) brightness(0.9) !important;
+          filter: grayscale(0.12) contrast(1.08) brightness(0.85) !important;
           border: 1px solid rgba(193, 127, 83, 0.15) !important;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+          box-shadow: 0 20px 45px rgba(0,0,0,0.6);
           transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
         main img:hover {
           transform: scale(1.02);
         }
 
-        /* Elevating fonts to premium editorial serif and tracked-out clean sans-serif */
         main h1, main h2 {
           font-family: "Playfair Display", "Didot", "Bodoni MT", serif !important;
           font-weight: 300 !important;
-          letter-spacing: -0.02em !important;
+          letter-spacing: -0.01em !important;
           color: #F4F4F0 !important;
         }
 
-        /* Camel/Tan leather tone accents directly pulled from your salon chairs */
+        /* Camel/Tan leather tone directly matching the physical styling chairs */
         .text-primary, [class*="text-gold"], .font-outline {
-          color: #C17F53 !important; /* Rich camel leather hex */
+          color: #C17F53 !important;
         }
         
         .border-primary, [class*="border-gold"] {
           border-color: rgba(193, 127, 83, 0.4) !important;
         }
 
-        /* Clean up modern button styles to feel like luxury gallery links */
         button, .btn-prime {
           background-color: transparent !important;
           border: 1px solid rgba(193, 127, 83, 0.3) !important;
@@ -190,16 +207,16 @@ export default function Page() {
         }
       `}} />
 
-      {/* Luxury Tactile Overlay — Soft Linen Texture Instead of Digital Noise */}
+      {/* Luxury Tactile Fine-Linen Texture */}
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none select-none z-[999]" 
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.012'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* Architectural Geometric Background Gradients (Warm Amber Light Leaks) */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none z-[1] opacity-30">
+      {/* Structural Interior Ambient Glows */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none z-[1] opacity-35">
         <div className="absolute top-[-10%] left-[-20%] w-[60vw] h-[60vw] rounded-full bg-radial from-[#C17F53]/10 to-transparent blur-[120px]" />
         <div className="absolute bottom-[20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-radial from-[#8C7A6B]/10 to-transparent blur-[100px]" />
       </div>
@@ -207,15 +224,17 @@ export default function Page() {
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={() => setIsOpen(true)} />
-        <Hero onBook={() => setIsOpen(true)} />
         
-        {/* Architectural Visual Accent Break */}
+        {/* Pass down centralized image props dynamically */}
+        <Hero onBook={() => setIsOpen(true)} image={SALON_IMAGES.heroBackdrop} />
+        
         <div className="w-full max-w-6xl mx-auto px-4 my-8 h-[1px] bg-gradient-to-r from-transparent via-[#C17F53]/20 to-transparent" />
         
-        <Manifesto />
-        <Collections />
+        <Manifesto image={SALON_IMAGES.manifestoInterior} />
+        <Collections images={[SALON_IMAGES.collectionHair, SALON_IMAGES.collectionBeard, SALON_IMAGES.collectionAtmosphere]} />
         <Membership />
-        <Footprint onBook={() => setIsOpen(true)} />
+        <Footprint onBook={() => setIsOpen(true)} image={SALON_IMAGES.footprintBasin} />
+        
         <BookingModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </div>
     </main>
