@@ -20,6 +20,16 @@ declare global {
   }
 }
 
+// PREMIUM IMAGE REGISTRY - ROUTED DIRECTLY TO YOUR PUBLIC ASSETS
+const SALON_IMAGES = {
+  heroBackdrop: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
+  manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
+  collectionHair: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
+  collectionBeard: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
+  collectionAtmosphere: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
+  footprintBasin: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp"
+}
+
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
   if (el.dataset.split === "true") {
     return Array.from(el.querySelectorAll<HTMLElement>("[data-word]"))
@@ -370,7 +380,7 @@ export default function Page() {
           -webkit-font-smoothing: antialiased !important;
         }
 
-        /* Cinematic Media Treatements */
+        /* Cinematic Media Treatments */
         main img, main video, [style*="background-image"] {
           filter: contrast(1.08) brightness(0.88) saturate(0.85) !important;
           border-radius: 2px !important;
@@ -491,11 +501,14 @@ export default function Page() {
       <div className="relative z-10">
         <Cursor />
         <Nav onConsult={open} />
-        <Hero onBook={open} />
-        <Manifesto />
-        <Collections />
+        
+        {/* WEBP SEAMLESSLY PLUGGED DIRECTLY INTO COMPONENT PROPS */}
+        <Hero onBook={open} image={SALON_IMAGES.heroBackdrop} />
+        <Manifesto image={SALON_IMAGES.manifestoInterior} />
+        <Collections images={[SALON_IMAGES.collectionHair, SALON_IMAGES.collectionBeard, SALON_IMAGES.collectionAtmosphere]} />
         <Membership />
-        <Footprint onBook={open} />
+        <Footprint onBook={open} image={SALON_IMAGES.footprintBasin} />
+        
         <BookingModal isOpen={isOpen} onClose={close} />
       </div>
     </main>
