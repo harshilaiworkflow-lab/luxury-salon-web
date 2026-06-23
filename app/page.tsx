@@ -10,7 +10,7 @@ import { Footprint } from "@/components/salon/footprint"
 import { BookingModal } from "@/components/salon/booking-modal"
 import { Cursor } from "@/components/salon/cursor"
 
-// minimal typings for the CDN globals we attach to window
+// Minimal typings for the CDN globals attached to window
 declare global {
   interface Window {
     Lenis?: any
@@ -106,17 +106,27 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
+      // --- 1. Elite Smooth Scroll Implementation ---
       if (Lenis) {
-        const lenis = new Lenis({ duration: 1.15, smoothWheel: true })
+        const lenis = new Lenis({ duration: 1.25, smoothWheel: true })
         lenisRef.current = lenis
         const raf = (time: number) => {
           lenis.raf(time)
+          
+          // Micro-Upgrade: Cinematic Parallax Depth Modulation
+          if (vantaEffect && vantaEffect.options) {
+            const velocity = Math.abs(lenis.velocity || 0)
+            // Waves subtly expand and compress based on scroll velocity bursts
+            vantaEffect.options.scale = 1.0 + Math.min(velocity * 0.04, 0.25)
+          }
+          
           rafId = requestAnimationFrame(raf)
         }
         rafId = requestAnimationFrame(raf)
         if (ScrollTrigger) lenis.on("scroll", ScrollTrigger.update)
       }
 
+      // --- 2. Ultra-Premium Text and Structural Reveals ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -125,23 +135,66 @@ export default function Page() {
           gsap.to(el, {
             opacity: 1,
             y: 0,
-            duration: 1,
-            ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%" },
+            duration: 1.2,
+            ease: "power4.out",
+            scrollTrigger: { trigger: el, start: "top 90%" },
           })
         })
 
         const headers = gsap.utils.toArray<HTMLElement>(".split-words")
         headers.forEach((el: HTMLElement) => {
           const words = splitIntoWords(el)
-          gsap.set(words, { yPercent: 120 })
+          gsap.set(words, { yPercent: 130, rotate: 2 })
           gsap.to(words, {
             yPercent: 0,
-            duration: 0.9,
+            rotate: 0,
+            duration: 1.1,
             ease: "power4.out",
-            stagger: 0.08,
+            stagger: 0.06,
             scrollTrigger: { trigger: el, start: "top 85%" },
           })
+        })
+
+        // Micro-Upgrade: Elite Magnetic Button Mechanics
+        const interactiveTargets = document.querySelectorAll("button, a, [role='button']")
+        interactiveTargets.forEach((btn: any) => {
+          btn.addEventListener("mousemove", (e: MouseEvent) => {
+            const bounds = btn.getBoundingClientRect()
+            const mouseX = e.clientX - bounds.left - bounds.width / 2
+            const mouseY = e.clientY - bounds.top - bounds.height / 2
+            
+            gsap.to(btn, {
+              x: mouseX * 0.4,
+              y: mouseY * 0.4,
+              scale: 1.03,
+              duration: 0.3,
+              ease: "power2.out"
+            })
+          })
+
+          btn.addEventListener("mouseleave", () => {
+            gsap.to(btn, {
+              x: 0,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: "elastic.out(1.1, 0.4)"
+            })
+          })
+        })
+
+        // Micro-Upgrade: Real-Time Luxury Copy-writing Mutation
+        document.querySelectorAll("button, a, span, h2").forEach((el: any) => {
+          if (!el.children.length && el.textContent) {
+            const txt = el.textContent.trim()
+            if (txt.toLowerCase() === "book appointment") {
+              el.textContent = "Secure An Invitation"
+            } else if (txt.toLowerCase() === "request consultation") {
+              el.textContent = "Commence Private Intake"
+            } else if (txt.toLowerCase() === "footprint") {
+              el.textContent = "The Ateliers"
+            }
+          }
         })
 
         ScrollTrigger.refresh()
@@ -149,6 +202,7 @@ export default function Page() {
         revealFallback()
       }
 
+      // --- 3. Hardware-Accelerated 3D Background Config ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -172,14 +226,10 @@ export default function Page() {
       cancelled = true
       if (rafId) cancelAnimationFrame(rafId)
       if (vantaEffect) {
-        try {
-          vantaEffect.destroy()
-        } catch {}
+        try { vantaEffect.destroy() } catch {}
       }
       if (lenisRef.current) {
-        try {
-          lenisRef.current.destroy()
-        } catch {}
+        try { lenisRef.current.destroy() } catch {}
         lenisRef.current = null
       }
       if (window.ScrollTrigger) {
@@ -206,16 +256,31 @@ export default function Page() {
   const close = () => setIsOpen(false)
 
   return (
-    <main className="relative text-foreground min-h-screen bg-transparent">
-      {/* 3D CANVAS BASE LAYER */}
+    <main className="relative min-h-screen bg-transparent select-none overflow-x-hidden">
+      {/* GLOBAL HIGH-CONTRAST LUXURY INJECTOR STYLE SHEET */}
+      <style jsx global>{`
+        body {
+          background-color: #0A0A0A !important;
+        }
+        main p, main span, main h1, main h2, main h3, main li, main a {
+          color: #ffffff !important;
+          text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.85);
+        }
+        /* Keep theme gold text nodes explicitly gold if stylized */
+        .text-primary, [class*="text-gold"], .split-words {
+          color: #cca43b !important;
+        }
+      `}</style>
+
+      {/* 3D CANVAS LAYER (Completely detached behind layout, ignoring interference clicks) */}
       <div 
         id="vanta-canvas" 
-        className="fixed inset-0 w-full h-full" 
-        style={{ backgroundColor: "#0A0A0A", zIndex: 0 }} 
+        className="fixed inset-0 w-full h-full pointer-events-none" 
+        style={{ backgroundColor: "#0A0A0A", zIndex: -1 }} 
       />
 
-      {/* FOREGROUND CONTENT LAYER */}
-      <div className="relative z-10 pointer-events-none children-auto-events">
+      {/* COMPONENT FOREGROUND VIEWPORT (Fully interactive interactive events restored) */}
+      <div className="relative z-10">
         <Cursor />
         <Nav onConsult={open} />
         <Hero onBook={open} />
