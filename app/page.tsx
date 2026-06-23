@@ -21,9 +21,6 @@ declare global {
   }
 }
 
-// Splits an element's plain text into per-word masks for line-by-line reveals.
-// Each word gets an overflow-hidden outer span + an inner span that GSAP slides.
-// Idempotent: re-running on an already-split node is a no-op.
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
   if (el.dataset.split === "true") {
     return Array.from(el.querySelectorAll<HTMLElement>("[data-word]"))
@@ -80,7 +77,6 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
   const lenisRef = useRef<any>(null)
 
-  // ---- Lenis smooth scroll + GSAP reveals + Vanta Topology background ----
   useEffect(() => {
     let vantaEffect: any = null
     let rafId = 0
@@ -95,17 +91,16 @@ export default function Page() {
 
     async function init() {
       try {
-        // base libs: smooth scroll, gsap, and p5 (required by Vanta Topology)
-        await Promise.all([
-          loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
-          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
-          loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"),
-        ])
-        // plugins that depend on the base libs
-        await Promise.all([
-          loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"),
-          loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js"),
-        ])
+        // 1. Load Animation and Scroll foundations sequentially to prevent collisions
+        await loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js")
+        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js")
+        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js")
+        
+        // 2. STAGE 1 GEOMETRY: Load p5.js completely first
+        await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js")
+        
+        // 3. STAGE 2 GEOMETRY: Load Vanta only after p5 window elements are active
+        await loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
       } catch (err) {
         console.log("[v0] CDN script load failed:", (err as Error).message)
         revealFallback()
@@ -132,7 +127,6 @@ export default function Page() {
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
-        // Block-level fade / slide reveals
         const items = gsap.utils.toArray<HTMLElement>(".reveal")
         items.forEach((el: HTMLElement) => {
           gsap.to(el, {
@@ -144,8 +138,6 @@ export default function Page() {
           })
         })
 
-        // Cinematic clip-mask split reveal: each word sits in an overflow-clipped
-        // mask and rises into place, line by line, as the header scrolls in.
         const headers = gsap.utils.toArray<HTMLElement>(".split-words")
         headers.forEach((el: HTMLElement) => {
           const words = splitIntoWords(el)
@@ -164,28 +156,26 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- Vanta Topology: pitch-black field with slow undulating gold wave lines ---
-      // Mouse + gyro disabled for a locked, jank-free 60fps scroll.
+      // --- Vanta Topology Config Initialization ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
           p5,
-          mouseControls: false,
+          mouseControls: true,
           touchControls: false,
           gyroControls: false,
           minHeight: 200.0,
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          backgroundColor: 0x0a0a0a,
-          color: 0x4a3a16,
+          backgroundColor: 0x0a0a0a, // Rich black background
+          color: 0xcca43b,           // Vibrant, premium visible gold lines
         })
       }
     }
 
     init()
 
-    // ---- strict cleanup: destroy Vanta + Lenis, cancel RAF, kill triggers ----
     return () => {
       cancelled = true
       if (rafId) cancelAnimationFrame(rafId)
@@ -206,7 +196,6 @@ export default function Page() {
     }
   }, [])
 
-  // ---- Freeze background scroll while the modal is open ----
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
@@ -226,7 +215,7 @@ export default function Page() {
 
   return (
     <main className="relative bg-background text-foreground min-h-screen">
-      {/* 3D WEBGL CANVAS TARGET LAYER */}
+      {/* Target canvas backdrop for 3D graphics initialization */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full -z-10 pointer-events-none" 
