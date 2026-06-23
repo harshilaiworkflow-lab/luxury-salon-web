@@ -91,15 +91,10 @@ export default function Page() {
 
     async function init() {
       try {
-        // 1. Load Animation and Scroll foundations sequentially to prevent collisions
         await loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js")
         await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js")
         await loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js")
-        
-        // 2. STAGE 1 GEOMETRY: Load p5.js completely first
         await loadScript("https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js")
-        
-        // 3. STAGE 2 GEOMETRY: Load Vanta only after p5 window elements are active
         await loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
       } catch (err) {
         console.log("[v0] CDN script load failed:", (err as Error).message)
@@ -111,7 +106,6 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- Lenis smooth scroll ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.15, smoothWheel: true })
         lenisRef.current = lenis
@@ -123,7 +117,6 @@ export default function Page() {
         if (ScrollTrigger) lenis.on("scroll", ScrollTrigger.update)
       }
 
-      // --- GSAP scroll reveals ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -156,7 +149,6 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- Vanta Topology Config Initialization ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -168,8 +160,8 @@ export default function Page() {
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          backgroundColor: 0x0a0a0a, // Rich black background
-          color: 0xcca43b,           // Vibrant, premium visible gold lines
+          backgroundColor: 0x0a0a0a, 
+          color: 0xcca43b,           
         })
       }
     }
@@ -214,22 +206,25 @@ export default function Page() {
   const close = () => setIsOpen(false)
 
   return (
-    <main className="relative bg-background text-foreground min-h-screen">
-      {/* Target canvas backdrop for 3D graphics initialization */}
+    <main className="relative text-foreground min-h-screen bg-transparent">
+      {/* 3D CANVAS BASE LAYER */}
       <div 
         id="vanta-canvas" 
-        className="fixed inset-0 w-full h-full -z-10 pointer-events-none" 
-        style={{ backgroundColor: "#0A0A0A" }} 
+        className="fixed inset-0 w-full h-full" 
+        style={{ backgroundColor: "#0A0A0A", zIndex: 0 }} 
       />
 
-      <Cursor />
-      <Nav onConsult={open} />
-      <Hero onBook={open} />
-      <Manifesto />
-      <Collections />
-      <Membership />
-      <Footprint onBook={open} />
-      <BookingModal isOpen={isOpen} onClose={close} />
+      {/* FOREGROUND CONTENT LAYER */}
+      <div className="relative z-10 pointer-events-none children-auto-events">
+        <Cursor />
+        <Nav onConsult={open} />
+        <Hero onBook={open} />
+        <Manifesto />
+        <Collections />
+        <Membership />
+        <Footprint onBook={open} />
+        <BookingModal isOpen={isOpen} onClose={close} />
+      </div>
     </main>
   )
 }
