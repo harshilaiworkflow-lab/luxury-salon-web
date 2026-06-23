@@ -91,8 +91,7 @@ export default function Page() {
 
     async function init() {
       try {
-        // PILLAR 2: Asynchronous Batch Processing (Shatters script loading waterfalls)
-        // Group 1: Core standalone libraries download concurrently
+        // PILLAR 2: Concurrent Batch script optimization
         await Promise.all([
           loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
@@ -101,13 +100,12 @@ export default function Page() {
 
         if (cancelled) return
 
-        // Group 2: Plugins dependent on window engines execute in parallel right behind them
         await Promise.all([
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"),
           loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
         ])
       } catch (err) {
-        console.log("[v0] High-performance asset batching dropped:", (err as Error).message)
+        console.log("[v0] Core script loading optimization error:", (err as Error).message)
         revealFallback()
         return
       }
@@ -116,7 +114,7 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- Smooth Scroll Engine & Velocity Modulation ---
+      // --- Smooth Scroll Engine & Cinematic Anchor Gliding ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
@@ -141,7 +139,7 @@ export default function Page() {
               const targetSection = document.querySelector(href)
               if (targetSection) {
                 lenis.scrollTo(targetSection, {
-                  offset: -20,
+                  offset: -40,
                   duration: 1.6,
                   immediate: false
                 })
@@ -152,7 +150,7 @@ export default function Page() {
         document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- Kinetic Spatial Typography Reveals ---
+      // --- Spatial Typography & Magnetic Field Interactions ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
@@ -181,7 +179,7 @@ export default function Page() {
           })
         })
 
-        // Magnetic Hover Fields
+        // Interactive Button Magnetics
         const interactiveTargets = document.querySelectorAll("button, a, [role='button']")
         interactiveTargets.forEach((btn: any) => {
           btn.addEventListener("mousemove", (e: MouseEvent) => {
@@ -244,7 +242,6 @@ export default function Page() {
           color: 0xcca43b,           
         })
         
-        // Let the 3D surface fade onto the screen smoothly to avoid pop-in shifts
         const canvasEl = document.getElementById("vanta-canvas")
         if (canvasEl) canvasEl.style.opacity = "1"
       }
@@ -267,7 +264,7 @@ export default function Page() {
     }
   }, [])
 
-  // Heavy Vacuum-Sealed Modal Sequences
+  // PILLAR 4: Heavy Vacuum-Sealed Modal Sequences
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
@@ -311,19 +308,53 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
-      {/* PILLAR 2: CSS Rendering Layer Optimization Overrides */}
+      {/* GLOBAL LUXURY MECHANICAL ENGINE OVERRIDES */}
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           background-color: #0A0A0A !important;
           text-rendering: optimizeLegibility !important;
           -webkit-font-smoothing: antialiased !important;
         }
-        /* Optimize multi-tier rendering layout calculations */
+
+        /* PILLAR 1: BOLD LUXURY WHITESPACE INJECTION */
         main section {
+          padding-top: 14rem !important;
+          padding-bottom: 14rem !important;
+          min-height: 95vh !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
           transform: translateZ(0);
           backface-visibility: hidden;
-          perspective: 1000px;
         }
+
+        /* PILLAR 1: ASYMMETRIC EDITORIAL LAYOUT MATRIX */
+        main section:nth-of-type(odd) > div {
+          max-width: 68% !important;
+          margin-left: 6% !important;
+          margin-right: auto !important;
+          text-align: left !important;
+        }
+        main section:nth-of-type(even) > div {
+          max-width: 68% !important;
+          margin-left: auto !important;
+          margin-right: 8% !important;
+          text-align: left !important;
+        }
+
+        /* Premium Editorial Typography Metrics */
+        main h1, main h2 {
+          letter-spacing: 0.14em !important;
+          line-height: 1.25 !important;
+          margin-bottom: 4rem !important;
+        }
+        main p {
+          letter-spacing: 0.05em !important;
+          line-height: 1.9 !important;
+          max-width: 40rem !important; /* Forces premium reading tracking dimensions */
+        }
+
+        /* Global High-Contrast Diamond White Typography Controls */
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
         }
@@ -344,7 +375,7 @@ export default function Page() {
         }
       `}} />
 
-      {/* 3D CANVAS BACKGROUND LAYER (With initial absolute zero opacity for fluid fade-in execution) */}
+      {/* 3D BACKGROUND LAYER */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-1000" 
