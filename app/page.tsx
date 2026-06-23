@@ -20,13 +20,12 @@ declare global {
 
 // WORLD-CLASS CONTENT REGISTRY
 const SALON_IMAGES = {
-  // Replace the placeholder text inside the quotes with your real Cloudinary links
-  heroBackdrop: "https://res.cloudinary.com/dwi1wllln/image/upload/f_auto,q_auto/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg_kauulf", 
-  manifestoInterior: "https://res.cloudinary.com/dwi1wllln/image/upload/v1782236545/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg_r4qh9m.avif",
-  collectionHair: "https://res.cloudinary.com/dwi1wllln/image/upload/f_auto,q_auto/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg_kauulf",
-  collectionBeard: "https://res.cloudinary.com/dwi1wllln/image/upload/v1782236545/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg_r4qh9m.avif",
-  collectionAtmosphere: "https://res.cloudinary.com/dwi1wllln/image/upload/f_auto,q_auto/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg_kauulf",
-  footprintBasin: "https://res.cloudinary.com/dwi1wllln/image/upload/v1782236545/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg_r4qh9m.avif"
+  heroBackdrop: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
+  manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
+  collectionHair: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
+  collectionBeard: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp",
+  collectionAtmosphere: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
+  footprintBasin: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.webp"
 }
 export default function Page() {
   const [isOpen, setIsOpen] = useState(false)
