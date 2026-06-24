@@ -20,14 +20,14 @@ declare global {
   }
 }
 
-// FORCED SINGLE ASSET REGISTRY - USES THE EXACT WORKING FILENAME
+// FORCED FIXED REGISTRY - MATCHES THE EXACT CASE FROM GITHUB
 const SALON_IMAGES = {
-  heroBackdrop: "/Advance cut image.jpeg",
-  manifestoInterior: "/Advance cut image.jpeg",
-  collectionHair: "/Advance cut image.jpeg",
-  collectionBeard: "/Advance cut image.jpeg",
-  collectionAtmosphere: "/Advance cut image.jpeg",
-  footprintBasin: "/Advance cut image.jpeg"
+  heroBackdrop: "/Advance Cut image.jpeg",
+  manifestoInterior: "/Advance Cut image.jpeg",
+  collectionHair: "/Advance Cut image.jpeg",
+  collectionBeard: "/Advance Cut image.jpeg",
+  collectionAtmosphere: "/Advance Cut image.jpeg",
+  footprintBasin: "/Advance Cut image.jpeg"
 }
 
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
@@ -395,6 +395,7 @@ export default function Page() {
         main h1, main h2 {
           letter-spacing: 0.14em !important;
           line-height: 1.25 !important;
+          text-transform: uppercase;
         }
         
         main p {
