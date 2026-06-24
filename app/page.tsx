@@ -5,7 +5,7 @@ import { Nav } from "@/components/salon/nav"
 import { Hero } from "@/components/salon/hero"
 import { Manifesto } from "@/components/salon/manifesto"
 import { Collections } from "@/components/salon/collections"
-import { Artisans } from "@/components/artisans" // <-- FIXED TO MATCH CURRENT LOCATION
+import { Artisans } from "@/components/artisans"
 import { Membership } from "@/components/salon/membership"
 import { Footprint } from "@/components/salon/footprint"
 import { BookingModal } from "@/components/salon/booking-modal"
@@ -30,6 +30,46 @@ const SALON_IMAGES = {
   collectionAtmosphere: "/Advance Cut image.jpeg",
   footprintBasin: "/Advance Cut image.jpeg"
 }
+
+// THE SIX GEOGRAPHIC HOUSES DATA
+const ADVANCE_CUT_HOUSES = [
+  {
+    title: "House I — Golf Course Road",
+    designation: "The Flagship Atelier",
+    address: "Sector 54, Golf Course Road, Gurugram",
+    ambience: "Monolithic marble structures, private acoustic zoning, custom brass bays."
+  },
+  {
+    title: "House II — DLF Phase IV",
+    designation: "The Heritage Suite",
+    address: "Galleria Structure, DLF Phase IV, Gurugram",
+    ambience: "Restored high-ceiling alignment, warm editorial grooming quarters."
+  },
+  {
+    title: "House III — Ambience Island",
+    designation: "The Waterfront Sanctuary",
+    address: "Ambience Lagoon Towers, Gurugram",
+    ambience: "Floor-to-ceiling tinted glass, low-iron cinematic technical grids."
+  },
+  {
+    title: "House IV — Sohna Road",
+    designation: "The Southern Pavilion",
+    address: "Vipul Tech Square, Sohna Road, Gurugram",
+    ambience: "Industrial structural concrete balanced with raw walnut panels."
+  },
+  {
+    title: "House V — Nirvana Country",
+    designation: "The Courtyard Atelier",
+    address: "Nirvana Courtyard, Sector 50, Gurugram",
+    ambience: "Secluded private intake lounges, botanical atmospheric balancing."
+  },
+  {
+    title: "House VI — Civil Lines",
+    designation: "The Lineage House",
+    address: "Old Civil Lines, Executive Enclave, Gurugram",
+    ambience: "Vintage architectural silhouettes, classical straight-edge leather bays."
+  }
+]
 
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
   if (el.dataset.split === "true") {
@@ -81,6 +121,57 @@ function loadScript(src: string): Promise<void> {
     s.addEventListener("error", () => reject(new Error(`Failed: ${src}`)))
     document.head.appendChild(s)
   })
+}
+
+// INLINE COMPONENT FOR THE ATELIERS GRID
+function HousesSection() {
+  return (
+    <section id="houses" className="reveal relative w-full py-32 bg-[#0A0A0A] border-t border-neutral-900/40">
+      <div className="max-w-6xl mx-auto px-6 space-y-16 w-full">
+        
+        <div className="space-y-2 text-left">
+          <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#cca43b]">
+            Geographic Footprint
+          </span>
+          <h2 className="text-2xl md:text-3xl font-light uppercase tracking-widest text-white">
+            The Six Houses
+          </h2>
+          <div className="h-[1px] w-12 bg-[#cca43b]/30" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+          {ADVANCE_CUT_HOUSES.map((house, idx) => (
+            <div 
+              key={idx} 
+              className="group relative flex flex-col space-y-4 p-8 border border-neutral-900/60 bg-neutral-950/40 hover:border-[#cca43b]/30 transition-all duration-500 rounded-[2px]"
+            >
+              <div className="flex justify-between items-baseline">
+                <span className="text-[9px] font-mono tracking-widest text-[#cca43b] uppercase bg-neutral-900/50 px-2 py-0.5 rounded-[1px]">
+                  {house.designation}
+                </span>
+                <span className="text-[11px] font-light text-neutral-600">
+                  0{idx + 1}
+                </span>
+              </div>
+              <h3 className="text-base font-light uppercase tracking-wider text-white transition-colors duration-300 group-hover:text-[#cca43b]">
+                {house.title}
+              </h3>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                {house.address}
+              </p>
+              <div className="h-[1px] w-full bg-neutral-900/60 my-2" />
+              <p className="text-[11px] text-neutral-500 font-light italic leading-relaxed">
+                {house.ambience}
+              </p>
+              
+              <div className="absolute top-0 left-0 w-[1px] h-0 bg-[#cca43b]/20 transition-all duration-500 group-hover:h-full" />
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  )
 }
 
 export default function Page() {
@@ -374,23 +465,8 @@ export default function Page() {
         }
 
         main section {
-          padding-top: 12rem !important;
-          padding-bottom: 12rem !important;
-          min-height: 95vh !important;
-          display: flex !important;
-          flex-direction: column !important;
-          justify-content: center !important;
-          align-items: center !important;
           transform: translateZ(0);
           backface-visibility: hidden;
-        }
-
-        main section > div {
-          width: 100% !important;
-          max-width: 1200px !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
-          text-align: center !important;
         }
 
         main h1, main h2 {
@@ -402,8 +478,6 @@ export default function Page() {
         main p {
           letter-spacing: 0.05em !important;
           line-height: 1.9 !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
         }
 
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
@@ -473,6 +547,10 @@ export default function Page() {
         <Artisans /> 
         
         <Membership />
+        
+        {/* ADDED BACK: THE SIX HOUSES GEOGRAPHIC GRID */}
+        <HousesSection />
+        
         <Footprint onBook={open} image={SALON_IMAGES.footprintBasin} />
         
         <BookingModal isOpen={isOpen} onClose={close} />
