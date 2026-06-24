@@ -20,16 +20,15 @@ declare global {
   }
 }
 
-// PREMIUM IMAGE REGISTRY - UPDATED WITH THE EXACT UPLOADED EXTENSIONS
+// PREMIUM IMAGE REGISTRY - CONFIGURATED TO MATCH YOUR EXACT DESKTOP FILENAMES
 const SALON_IMAGES = {
-  heroBackdrop: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
-  manifestoInterior: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.avif", // Fixed to .avif
-  collectionHair: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
-  collectionBeard: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.avif",   // Fixed to .avif
-  collectionAtmosphere: "/advance-cut-salon-new-colony-gurgaon-salons-1krqi0el4f.jpg.webp",
-  footprintBasin: "/advance-cut-salon-new-colony-gurgaon-salons-nfdmmk76tj.jpg.avif"     // Fixed to .avif
+  heroBackdrop: "/ONE.hero.webp",
+  manifestoInterior: "/Two.manifesto.avif",
+  collectionHair: "/ONE.hero.webp",
+  collectionBeard: "/Two.manifesto.avif",
+  collectionAtmosphere: "/ONE.hero.webp",
+  footprintBasin: "/Two.manifesto.avif"
 }
-
 
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
   if (el.dataset.split === "true") {
