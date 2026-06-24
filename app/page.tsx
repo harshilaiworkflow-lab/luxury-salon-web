@@ -5,7 +5,7 @@ import { Nav } from "@/components/salon/nav"
 import { Hero } from "@/components/salon/hero"
 import { Manifesto } from "@/components/salon/manifesto"
 import { Collections } from "@/components/salon/collections"
-import { Artisans } from "@/components/salon/artisans" // <-- CHANGE A: IMPORTED ARTISANS
+import { Artisans } from "@/components/artisans" // <-- FIXED TO MATCH CURRENT LOCATION
 import { Membership } from "@/components/salon/membership"
 import { Footprint } from "@/components/salon/footprint"
 import { BookingModal } from "@/components/salon/booking-modal"
@@ -470,7 +470,6 @@ export default function Page() {
         <Manifesto image={SALON_IMAGES.manifestoInterior} />
         <Collections images={[SALON_IMAGES.collectionHair, SALON_IMAGES.collectionBeard, SALON_IMAGES.collectionAtmosphere]} />
         
-        {/* CHANGE B: RENDER THE MASTER ARTISANS COMPONENT */}
         <Artisans /> 
         
         <Membership />
