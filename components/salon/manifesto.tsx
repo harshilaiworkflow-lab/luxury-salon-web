@@ -39,13 +39,12 @@ export function Manifesto({ image }: ManifestoProps) {
         {/* Right Column: Visual Container */}
         <div className="lg:col-span-5 w-full aspect-[4/5] relative bg-neutral-900 border border-neutral-800/40 overflow-hidden group shadow-2xl">
           <img 
-            src={image || "/Advance cut image.jpeg"} 
+            src={image || "/Advance Cut image.jpeg"} 
             alt="Advance Cut Grooming Atelier Interior" 
             className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             loading="eager"
             onError={(e) => {
-              // Failsafe backup if the path resolving acts up
-              (e.target as HTMLImageElement).src = "/Advance cut image.jpeg"
+              (e.target as HTMLImageElement).src = "/Advance Cut image.jpeg"
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 via-transparent to-transparent pointer-events-none" />
