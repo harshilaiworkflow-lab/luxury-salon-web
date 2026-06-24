@@ -5,6 +5,7 @@ import { Nav } from "@/components/salon/nav"
 import { Hero } from "@/components/salon/hero"
 import { Manifesto } from "@/components/salon/manifesto"
 import { Collections } from "@/components/salon/collections"
+import { Artisans } from "@/components/salon/artisans" // <-- CHANGE A: IMPORTED ARTISANS
 import { Membership } from "@/components/salon/membership"
 import { Footprint } from "@/components/salon/footprint"
 import { BookingModal } from "@/components/salon/booking-modal"
@@ -20,7 +21,7 @@ declare global {
   }
 }
 
-// FORCED FIXED REGISTRY - MATCHES THE EXACT CASE FROM GITHUB
+// CORE ASSET REGISTRY
 const SALON_IMAGES = {
   heroBackdrop: "/Advance Cut image.jpeg",
   manifestoInterior: "/Advance Cut image.jpeg",
@@ -468,6 +469,10 @@ export default function Page() {
         <Hero onBook={open} image={SALON_IMAGES.heroBackdrop} />
         <Manifesto image={SALON_IMAGES.manifestoInterior} />
         <Collections images={[SALON_IMAGES.collectionHair, SALON_IMAGES.collectionBeard, SALON_IMAGES.collectionAtmosphere]} />
+        
+        {/* CHANGE B: RENDER THE MASTER ARTISANS COMPONENT */}
+        <Artisans /> 
+        
         <Membership />
         <Footprint onBook={open} image={SALON_IMAGES.footprintBasin} />
         
