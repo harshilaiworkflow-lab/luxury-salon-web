@@ -1,88 +1,205 @@
 "use client"
 
 import { useState } from "react"
-import { COLLECTIONS, type Collection } from "./data"
 
-function ServiceGrid({ collection }: { collection: Collection }) {
-  return (
-    <div className="grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-2">
-      {collection.groups.map((group) => (
-        <div key={group.label}>
-          <h4 className="mb-5 text-[10px] uppercase tracking-[0.4em] text-gold">{group.label}</h4>
-          <ul>
-            {group.services.map((service) => (
-              <li key={service} data-cursor className="group relative border-t border-border">
-                <div className="flex items-center justify-between py-4">
-                  <span className="text-base tracking-wide text-muted-foreground transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:text-foreground md:text-lg">
-                    {service}
-                  </span>
-                  <span className="text-gold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    &rarr;
-                  </span>
-                </div>
-                {/* ultra-thin gold underline sliding left → right on hover */}
-                <span
-                  aria-hidden="true"
-                  className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-300 ease-out group-hover:scale-x-100"
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  )
+interface CollectionsProps {
+  images?: string[]
 }
 
-export function Collections() {
-  const [active, setActive] = useState<"men" | "women">("men")
+interface ServiceItem {
+  name: string
+  duration: string
+  description: string
+}
+
+interface ServiceCategory {
+  id: string
+  title: string
+  subtitle: string
+  imageIndex: number
+  services: ServiceItem[]
+}
+
+const MENU_DATA: ServiceCategory[] = [
+  {
+    id: "hair-architecture",
+    title: "Hair Architecture",
+    subtitle: "Precision engineering tailored to hair growth patterns and facial structure.",
+    imageIndex: 0,
+    services: [
+      {
+        name: "Editorial Cut & Sculpture",
+        duration: "45 Mins",
+        description: "Hand-sculpted wet/dry technique including an assessment of bone structure, charcoal scalp detox, and a custom styling finish."
+      },
+      {
+        name: "Tonal Realignment & Blend",
+        duration: "60 Mins",
+        description: "Advanced grey blending or full tonal shift using low-ammonia botanical pigments to map depth back into the hair architecture."
+      },
+      {
+        name: "Keratin Structural Infusion",
+        duration: "90 Mins",
+        description: "Deep molecular protein therapy designed to tame texture, eliminate frizz, and reinforce compromised hair cuticles."
+      }
+    ]
+  },
+  {
+    id: "shave-rituals",
+    title: "Shave Rituals",
+    subtitle: "The unhurried art of straight-razor grooming and skin preparation.",
+    imageIndex: 1,
+    services: [
+      {
+        name: "The Royal Atelier Shave",
+        duration: "60 Mins",
+        description: "A 7-step hot towel compression ritual, rich pre-shave oil infusion, double straight-razor pass, and a cold-stone obsidian facial massage."
+      },
+      {
+        name: "Beard Sculpting & Freehand Lineage",
+        duration: "30 Mins",
+        description: "Custom alignment mapping. Includes bulk control via freehand shear work, clean razor-shaved margins, and botanical oil conditioning."
+      },
+      {
+        name: "Express Razor Outline",
+        duration: "20 Mins",
+        description: "A swift cheekline and neckline cleanup using a fresh steel blade, hot lather, and an post-shave cooling astringent mist."
+      }
+    ]
+  },
+  {
+    id: "apothecary-treatments",
+    title: "Apothecary Treatments",
+    subtitle: "Advanced dermatological treatments for scalp and skin vitality.",
+    imageIndex: 2,
+    services: [
+      {
+        name: "Hyperbaric Scalp Purification",
+        duration: "45 Mins",
+        description: "An intensive micro-exfoliation treatment targeting hair follicles, paired with an ultrasonic tea tree rinse to maximize follicular oxygen intake."
+      },
+      {
+        name: "Volcanic Clay Face Ritual",
+        duration: "40 Mins",
+        description: "Deep pore extraction using active volcanic sediment and activated charcoal, concluded with a premium peptide hydration shield."
+      }
+    ]
+  }
+]
+
+export function Collections({ images = [] }: CollectionsProps) {
+  const [activeCategory, setActiveCategory] = useState<string>("hair-architecture")
+
+  // Fallback fallback asset registry matching app/page.tsx
+  const activeCategoryData = MENU_DATA.find((cat) => cat.id === activeCategory)
+  const currentImageIndex = activeCategoryData ? activeCategoryData.imageIndex : 0
+  const activeImage = images[currentImageIndex] || "/Advance Cut image.jpeg"
 
   return (
-    <section id="collections" className="relative scroll-mt-24 px-6 py-32 md:px-10 md:py-44">
-      <div className="mx-auto max-w-7xl">
-        <div className="reveal mb-16 text-center">
-          <p className="mb-6 text-[10px] uppercase tracking-[0.6em] text-gold md:text-xs">
-            The Collections Terminal
-          </p>
-          <h2 className="split-words text-4xl font-semibold uppercase tracking-[0.15em] text-foreground sm:text-5xl md:text-6xl">
-            Choose Your Atelier
-          </h2>
+    <section id="collections" className="reveal relative w-full min-h-screen flex items-center justify-center py-24 bg-[#0A0A0A]">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start text-left">
+        
+        {/* Left Column: Dynamic Visual Showcase */}
+        <div className="lg:col-span-5 w-full sticky top-32 aspect-[4/5] relative bg-neutral-900 border border-neutral-800/40 overflow-hidden shadow-2xl">
+          <div className="absolute inset-0 bg-black/20 z-[1] pointer-events-none" />
+          <img
+            src={activeImage}
+            alt="Advance Cut Curated Experience"
+            className="w-full h-full object-cover transition-all duration-1000 ease-in-out scale-100"
+            key={activeCategory} // Forces smooth re-fade trigger on asset changes
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 via-transparent to-transparent z-[2]" />
+          
+          {/* Ornamental Frame Corners */}
+          <div className="absolute top-3 left-3 w-2 h-2 border-t border-l border-[#cca43b]/40 z-[3]" />
+          <div className="absolute top-3 right-3 w-2 h-2 border-t border-r border-[#cca43b]/40 z-[3]" />
+          <div className="absolute bottom-3 left-3 w-2 h-2 border-b border-l border-[#cca43b]/40 z-[3]" />
+          <div className="absolute bottom-3 right-3 w-2 h-2 border-b border-r border-[#cca43b]/40 z-[3]" />
         </div>
 
-        {/* Dual-column selector */}
-        <div className="reveal grid grid-cols-1 border border-border md:grid-cols-2">
-          {(Object.keys(COLLECTIONS) as Array<"men" | "women">).map((key) => {
-            const col = COLLECTIONS[key]
-            const isActive = active === key
-            return (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setActive(key)}
-                aria-pressed={isActive}
-                className={`group relative flex flex-col items-center justify-center px-8 py-14 text-center transition-colors duration-500 md:py-20 ${
-                  isActive ? "bg-gold text-primary-foreground" : "bg-transparent text-foreground hover:bg-secondary"
-                } ${key === "men" ? "border-b border-border md:border-b-0 md:border-r" : ""}`}
-              >
-                <span className="text-2xl font-semibold uppercase tracking-[0.2em] sm:text-3xl md:text-4xl">
-                  {col.title}
-                </span>
-                <span
-                  className={`mt-3 text-xs uppercase tracking-[0.3em] transition-colors duration-500 ${
-                    isActive ? "text-primary-foreground/70" : "text-muted-foreground"
-                  }`}
-                >
-                  {col.tagline}
-                </span>
-              </button>
-            )
-          })}
+        {/* Right Column: Interactive Luxury Accordion */}
+        <div className="lg:col-span-7 space-y-8 w-full">
+          <div className="space-y-2">
+            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#cca43b]">
+              The Menu
+            </span>
+            <h2 className="text-2xl md:text-3xl font-light uppercase tracking-widest text-white">
+              Curated Rituals
+            </h2>
+            <div className="h-[1px] w-12 bg-[#cca43b]/30" />
+          </div>
+
+          <div className="divide-y divide-neutral-800/60 border-t border-b border-neutral-800/60">
+            {MENU_DATA.map((category) => {
+              const isOpen = activeCategory === category.id
+
+              return (
+                <div key={category.id} className="py-6 transition-colors duration-300">
+                  {/* Accordion Trigger Header */}
+                  <button
+                    onClick={() => setActiveCategory(category.id)}
+                    className="w-full flex items-center justify-between text-left group focus:outline-none"
+                  >
+                    <div className="space-y-1 pr-4">
+                      <h3 className={`text-lg md:text-xl font-light uppercase tracking-wider transition-colors duration-300 ${
+                        isOpen ? "text-[#cca43b]" : "text-white group-hover:text-[#cca43b]/80"
+                      }`}>
+                        {category.title}
+                      </h3>
+                      <p className="text-xs text-neutral-500 font-light max-w-md">
+                        {category.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Minimalist Interactive Icon Indicator */}
+                    <div className="relative flex items-center justify-center w-6 h-6">
+                      <span className={`absolute h-[1px] w-4 bg-[#cca43b] transition-transform duration-500 ease-out ${
+                        isOpen ? "rotate-180" : ""
+                      }`} />
+                      <span className={`absolute h-4 w-[1px] bg-[#cca43b] transition-transform duration-500 ease-out ${
+                        isOpen ? "rotate-90 opacity-0" : ""
+                      }`} />
+                    </div>
+                  </button>
+
+                  {/* Accordion Expansion Container */}
+                  <div className={`grid transition-all duration-500 ease-in-out overflow-hidden ${
+                    isOpen ? "grid-rows-[1fr] opacity-100 pt-8" : "grid-rows-[0fr] opacity-0"
+                  }`}>
+                    <div className="overflow-hidden space-y-6">
+                      {category.services.map((service, idx) => (
+                        <div 
+                          key={idx} 
+                          className="group/item flex flex-col md:flex-row md:items-start justify-between gap-2 pb-4 border-b border-dashed border-neutral-900 last:border-0 last:pb-0"
+                        >
+                          <div className="space-y-1 max-w-xl">
+                            <h4 className="text-sm font-medium tracking-wide text-neutral-200 group-hover/item:text-white transition-colors">
+                              {service.name}
+                            </h4>
+                            <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                              {service.description}
+                            </p>
+                          </div>
+                          <span className="text-xs font-mono tracking-widest text-[#cca43b] shrink-0 pt-0.5">
+                            {service.duration}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="pt-4 flex items-center gap-4">
+            <span className="text-xs uppercase tracking-[0.2em] text-neutral-500">
+              All services include personalized intake & herbal elixir pairing
+            </span>
+            <div className="h-[1px] flex-1 bg-neutral-900" />
+          </div>
         </div>
 
-        {/* Revealed service grid */}
-        <div key={active} className="mt-16 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <ServiceGrid collection={COLLECTIONS[active]} />
-        </div>
       </div>
     </section>
   )
