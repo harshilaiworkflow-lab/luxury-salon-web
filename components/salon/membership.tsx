@@ -1,7 +1,7 @@
 "use client"
 
 const MEMBERSHIP_TERMS = [
-  "Membership is Non-Refundable.",
+  "Membership is Non-Refundable. ",
   "No top-up in any membership.",
   "The discount is not valid with any other offer.",
   "Membership is not valid in other Advance Cut outlet.",
