@@ -31,43 +31,43 @@ const SALON_IMAGES = {
   footprintBasin: "/Advance Cut image.jpeg"
 }
 
-// THE SIX GEOGRAPHIC HOUSES DATA
+// THE FILTERED SIX REAL ADVANCE CUT HOUSES
 const ADVANCE_CUT_HOUSES = [
   {
-    title: "House I — Golf Course Road",
-    designation: "The Flagship Atelier",
-    address: "Sector 54, Golf Course Road, Gurugram",
-    ambience: "Monolithic marble structures, private acoustic zoning, custom brass bays."
+    title: "House I — Sector 4",
+    designation: "Atelier Suite",
+    address: "Sector-4, Gurugram",
+    ambience: "Monolithic structures, private acoustic zoning, custom premium styling bays."
   },
   {
-    title: "House II — DLF Phase IV",
-    designation: "The Heritage Suite",
-    address: "Galleria Structure, DLF Phase IV, Gurugram",
-    ambience: "Restored high-ceiling alignment, warm editorial grooming quarters."
+    title: "House II — Sector 9A",
+    designation: "Executive Space",
+    address: "Sector-9A, Gurugram",
+    ambience: "Clean minimalist layout alignment, warm editorial grooming quarters."
   },
   {
-    title: "House III — Ambience Island",
-    designation: "The Waterfront Sanctuary",
-    address: "Ambience Lagoon Towers, Gurugram",
-    ambience: "Floor-to-ceiling tinted glass, low-iron cinematic technical grids."
+    title: "House III — Sector 15",
+    designation: "Signature Lounge",
+    address: "Sector-15, Gurugram",
+    ambience: "Floor-to-ceiling technical design layouts with clear cinematic lighting grids."
   },
   {
-    title: "House IV — Sohna Road",
-    designation: "The Southern Pavilion",
-    address: "Vipul Tech Square, Sohna Road, Gurugram",
-    ambience: "Industrial structural concrete balanced with raw walnut panels."
+    title: "House IV — Sector 49",
+    designation: "The Pavilion",
+    address: "Sector-49, Gurugram",
+    ambience: "Modern architectural balancing mixed with premium private consultation rooms."
   },
   {
-    title: "House V — Nirvana Country",
-    designation: "The Courtyard Atelier",
-    address: "Nirvana Courtyard, Sector 50, Gurugram",
-    ambience: "Secluded private intake lounges, botanical atmospheric balancing."
+    title: "House V — New Colony",
+    designation: "Heritage Atelier",
+    address: "New Colony, Gurugram",
+    ambience: "Secluded private styling suites, tailored atmospheric layout choices."
   },
   {
-    title: "House VI — Civil Lines",
-    designation: "The Lineage House",
-    address: "Old Civil Lines, Executive Enclave, Gurugram",
-    ambience: "Vintage architectural silhouettes, classical straight-edge leather bays."
+    title: "House VI — Hisar",
+    designation: "Regional Elite Suite",
+    address: "Complex Hisar",
+    ambience: "Vintage architectural lines balanced with classic modern straight-edge leather stations."
   }
 ]
 
@@ -123,7 +123,6 @@ function loadScript(src: string): Promise<void> {
   })
 }
 
-// INLINE COMPONENT FOR THE ATELIERS GRID
 function HousesSection() {
   return (
     <section id="houses" className="reveal relative w-full py-32 bg-[#0A0A0A] border-t border-neutral-900/40">
@@ -134,7 +133,7 @@ function HousesSection() {
             Geographic Footprint
           </span>
           <h2 className="text-2xl md:text-3xl font-light uppercase tracking-widest text-white">
-            The Six Houses
+            Associated Houses
           </h2>
           <div className="h-[1px] w-12 bg-[#cca43b]/30" />
         </div>
@@ -156,7 +155,7 @@ function HousesSection() {
               <h3 className="text-base font-light uppercase tracking-wider text-white transition-colors duration-300 group-hover:text-[#cca43b]">
                 {house.title}
               </h3>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed">
+              <p className="text-xs text-neutral-300 font-light leading-relaxed">
                 {house.address}
               </p>
               <div className="h-[1px] w-full bg-neutral-900/60 my-2" />
@@ -548,7 +547,7 @@ export default function Page() {
         
         <Membership />
         
-        {/* ADDED BACK: THE SIX HOUSES GEOGRAPHIC GRID */}
+        {/* GEOGRAPHIC GRID UPDATED WITH EXCLUSIONS REMOVED */}
         <HousesSection />
         
         <Footprint onBook={open} image={SALON_IMAGES.footprintBasin} />
