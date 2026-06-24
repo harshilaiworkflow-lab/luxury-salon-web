@@ -27,7 +27,7 @@ export function Membership() {
             <div className="h-[1px] w-12 bg-[#cca43b]/30" />
           </div>
           <p className="text-xs text-neutral-400 font-light leading-relaxed">
-            Advance Cut memberships are calibrated for individuals who view grooming as an essential architectural maintenance structure. Members gain priority booking privileges across our master tier craftsmen.
+            {"Advance Cut memberships are calibrated for individuals who view grooming as an essential architectural maintenance structure. Members gain priority booking privileges across our master tier craftsmen."}
           </p>
         </div>
 
@@ -59,5 +59,4 @@ export function Membership() {
   )
 }
 
-// Default export fallback to prevent build failures across files
 export default Membership
