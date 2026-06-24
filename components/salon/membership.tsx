@@ -1,47 +1,57 @@
-const PACT = [
-  {
-    code: "I",
-    title: "Non-Refundable",
-    body: "All membership commitments are final. Value is preserved as service credit, never returned as currency.",
-  },
-  {
-    code: "II",
-    title: "Outlet Lock-In",
-    body: "Single-outlet memberships are bound to one branch. Multi-outlet access is available by private arrangement.",
-  },
-  {
-    code: "III",
-    title: "Exclusive Rate Card",
-    body: "Members operate under a dedicated rate card, applicable solely to enrolled services and named holders.",
-  },
+"use client"
+
+const MEMBERSHIP_TERMS = [
+  "Membership is Non-Refundable.",
+  "No top-up in any membership.",
+  "The discount is not valid with any other offer.",
+  "Membership is not valid in other Advance Cut outlet.",
+  "Membership discount is applicable on current rate card."
 ]
 
 export function Membership() {
   return (
-    <section id="membership" className="relative scroll-mt-24 px-6 py-32 md:px-10 md:py-44">
-      <div className="mx-auto max-w-5xl">
-        <div className="reveal overflow-hidden border border-gold/30 bg-card">
-          <div className="flex flex-col gap-2 border-b border-border px-8 py-10 text-center md:px-16 md:py-14">
-            <p className="text-[10px] uppercase tracking-[0.6em] text-gold md:text-xs">The Membership Pact</p>
-            <h2 className="split-words mt-3 text-3xl font-semibold uppercase tracking-[0.15em] text-foreground sm:text-4xl md:text-5xl">
-              Concierge Agreement
+    <section id="membership" className="reveal relative w-full py-32 bg-[#0A0A0A] border-t border-neutral-900/40">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start w-full">
+        
+        {/* Left Editorial Column */}
+        <div className="lg:col-span-5 space-y-6 text-left">
+          <div className="space-y-2">
+            <span className="text-xs font-medium uppercase tracking-[0.3em] text-[#cca43b]">
+              The Tier Registry
+            </span>
+            <h2 className="text-2xl md:text-3xl font-light uppercase tracking-widest text-white">
+              Private Membership
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
-              Admission to the Advance Cut club is governed by the following terms. By enrolling,
-              members acknowledge and accept each clause in full.
-            </p>
+            <div className="h-[1px] w-12 bg-[#cca43b]/30" />
           </div>
-
-          <div className="grid grid-cols-1 divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
-            {PACT.map((clause) => (
-              <article key={clause.code} className="reveal flex flex-col gap-4 px-8 py-12 md:px-10">
-                <span className="font-serif text-4xl text-gold">{clause.code}</span>
-                <h3 className="text-xs uppercase tracking-[0.3em] text-foreground">{clause.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{clause.body}</p>
-              </article>
-            ))}
-          </div>
+          <p className="text-xs text-neutral-400 font-light leading-relaxed">
+            Advance Cut memberships are calibrated for individuals who view grooming as an essential architectural maintenance structure. Members gain priority booking privileges across our master tier craftsmen.
+          </p>
         </div>
+
+        {/* Right Terms & Conditions Column */}
+        <div className="lg:col-span-7 w-full bg-neutral-950/40 border border-neutral-900/60 p-8 md:p-12 rounded-[2px] text-left relative group hover:border-[#cca43b]/20 transition-all duration-500">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#cca43b] block mb-6">
+            Associated Terms & Guidelines
+          </span>
+          
+          <ul className="space-y-4">
+            {MEMBERSHIP_TERMS.map((term, idx) => (
+              <li key={idx} className="flex items-start space-x-4">
+                <span className="text-[11px] font-mono text-[#cca43b] mt-1.5 select-none">
+                  0{idx + 1}
+                </span>
+                <p className="text-xs text-neutral-300 font-light tracking-wide leading-relaxed">
+                  {term}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          {/* Subtle decorative border accent */}
+          <div className="absolute top-0 left-0 w-[1px] h-0 bg-[#cca43b]/20 transition-all duration-500 group-hover:h-full" />
+        </div>
+
       </div>
     </section>
   )
