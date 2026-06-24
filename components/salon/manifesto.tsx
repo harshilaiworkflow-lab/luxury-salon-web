@@ -43,10 +43,11 @@ export function Manifesto() {
           {/* Main Showcase Image Slot — Pointing directly to your beautiful interior */}
           <div className="absolute inset-0 z-10 overflow-hidden bg-[#1C1C1A] border border-[#C17F53]/20">
             <img 
-              src="/salon-interior.jpg" 
-              alt="Advance Cut Grooming Atelier Interior" 
-              className="w-full h-full object-cover grayscale contrast-115 hover:scale-105 transition-transform duration-700"
-              onError={(e) => {
+  src="/Advance cut image.jpeg" 
+  alt="Advance Cut Grooming Atelier Interior" 
+  className="w-full h-full object-cover"
+/>
+            {
                 // Elegant structural placeholder if the image file isn't uploaded yet
                 e.currentTarget.style.display = 'none';
                 const parent = e.currentTarget.parentElement;
