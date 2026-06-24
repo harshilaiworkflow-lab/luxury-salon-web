@@ -20,14 +20,14 @@ declare global {
   }
 }
 
-// PREMIUM IMAGE REGISTRY - CONFIGURATED TO MATCH YOUR EXACT DESKTOP FILENAMES
+// SINGLE IMAGE REGISTRY - FORCED SINGLE ASSET FALLBACK FOR MAXIMUM STABILITY
 const SALON_IMAGES = {
-  heroBackdrop: "/ONE.hero.webp",
-  manifestoInterior: "/Two.manifesto.avif",
-  collectionHair: "/ONE.hero.webp",
-  collectionBeard: "/Two.manifesto.avif",
-  collectionAtmosphere: "/ONE.hero.webp",
-  footprintBasin: "/Two.manifesto.avif"
+  heroBackdrop: "/manifesto.jpg",
+  manifestoInterior: "/manifesto.jpg",
+  collectionHair: "/manifesto.jpg",
+  collectionBeard: "/manifesto.jpg",
+  collectionAtmosphere: "/manifesto.jpg",
+  footprintBasin: "/manifesto.jpg"
 }
 
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
@@ -88,7 +88,6 @@ export default function Page() {
   const lenisRef = useRef<any>(null)
   const audioCtxRef = useRef<AudioContext | null>(null)
 
-  // Pure Code-Synthesized Mechanical Haptic Tick (Zero Asset Overhead)
   const playMechanicalTick = (isClick = false) => {
     try {
       if (!audioCtxRef.current) {
@@ -116,11 +115,10 @@ export default function Page() {
       osc.start()
       osc.stop(ctx.currentTime + 0.016)
 
-      // Trigger the Sonic UI visualization feedback sheet
       setSonicWaveActive(true)
       setTimeout(() => setSonicWaveActive(false), 150)
     } catch (e) {
-      // Audio fallback silent to maintain stability
+      // Audio failsafe
     }
   }
 
@@ -140,7 +138,6 @@ export default function Page() {
 
     async function init() {
       try {
-        // Parallel Script Optimization Core
         await Promise.all([
           loadScript("https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"),
           loadScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"),
@@ -163,7 +160,6 @@ export default function Page() {
 
       const { Lenis, gsap, ScrollTrigger, p5, VANTA } = window
 
-      // --- Smooth Scroll Architecture ---
       if (Lenis) {
         const lenis = new Lenis({ duration: 1.4, smoothWheel: true })
         lenisRef.current = lenis
@@ -199,11 +195,9 @@ export default function Page() {
         document.addEventListener("click", globalScrollHandler)
       }
 
-      // --- Spatial Layout Animations & Premium Sound Mapping ---
       if (gsap && ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger)
 
-        // Kinetic Aperture/Shutter Reveal on Section elements
         const items = gsap.utils.toArray<HTMLElement>(".reveal")
         items.forEach((el: HTMLElement) => {
           gsap.fromTo(el, 
@@ -233,10 +227,8 @@ export default function Page() {
           })
         })
 
-        // Interactive Elements: Magnetic Grids + Mechanical Audio Bindings
         const interactiveTargets = document.querySelectorAll("button, a, [role='button'], .nav-link-item")
         interactiveTargets.forEach((btn: any) => {
-          
           btn.addEventListener("mouseenter", () => playMechanicalTick(false))
           btn.addEventListener("click", () => playMechanicalTick(true))
 
@@ -265,7 +257,6 @@ export default function Page() {
           })
         })
 
-        // Luxury Nomenclature Shifts
         document.querySelectorAll("button, a, span, h2, sub").forEach((el: any) => {
           if (!el.children.length && el.textContent) {
             const txt = el.textContent.trim()
@@ -284,7 +275,6 @@ export default function Page() {
         revealFallback()
       }
 
-      // --- Initialize Vanta Backdrop ---
       if (VANTA?.TOPOLOGY && p5) {
         vantaEffect = VANTA.TOPOLOGY({
           el: "#vanta-canvas",
@@ -322,7 +312,6 @@ export default function Page() {
     }
   }, [])
 
-  // Heavy Vacuum-Sealed Modal Sequence
   useEffect(() => {
     const lenis = lenisRef.current
     if (isOpen) {
@@ -372,7 +361,6 @@ export default function Page() {
 
   return (
     <main className="relative min-h-screen bg-[#0A0A0A] select-none overflow-x-hidden">
-      {/* GLOBAL LUXURY ENGINE SHEET */}
       <style dangerouslySetInnerHTML={{ __html: `
         html, body {
           background-color: #0A0A0A !important;
@@ -380,13 +368,11 @@ export default function Page() {
           -webkit-font-smoothing: antialiased !important;
         }
 
-        /* Cinematic Media Treatments */
         main img, main video, [style*="background-image"] {
           filter: contrast(1.08) brightness(0.88) saturate(0.85) !important;
           border-radius: 2px !important;
         }
 
-        /* Generous Symmetrical Breathing Room */
         main section {
           padding-top: 12rem !important;
           padding-bottom: 12rem !important;
@@ -419,7 +405,6 @@ export default function Page() {
           margin-right: auto !important;
         }
 
-        /* High-Contrast Diamond White Overrides */
         main p, main span, main h1, main h2, main h3, main li, main a, main label, main div:not(#vanta-canvas) {
           color: #ffffff !important;
         }
@@ -439,7 +424,6 @@ export default function Page() {
           color: #ffffff !important;
         }
 
-        /* VOLUMETRIC GOLD PARTICULATE ENGINE */
         @keyframes drift {
           0% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
           50% { opacity: 0.15; }
@@ -454,7 +438,6 @@ export default function Page() {
         }
       `}} />
 
-      {/* Analog Film Grain Compositor Mask */}
       <div 
         className="fixed inset-0 w-full h-full pointer-events-none select-none" 
         style={{
@@ -464,14 +447,12 @@ export default function Page() {
         }}
       />
 
-      {/* 3D VOLUMETRIC BACKGROUND ENGINE */}
       <div 
         id="vanta-canvas" 
         className="fixed inset-0 w-full h-full pointer-events-none opacity-0 transition-opacity duration-1000" 
         style={{ zIndex: 1 }} 
       />
 
-      {/* VOLUMETRIC PARTICULATE LAYER */}
       <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-[2]">
         <div className="particle w-[6px] h-[6px]" style={{ top: '20%', left: '15%', animation: 'drift 14s infinite linear' }} />
         <div className="particle w-[8px] h-[8px]" style={{ top: '65%', left: '80%', animation: 'drift 18s infinite linear', animationDelay: '2s' }} />
