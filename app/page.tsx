@@ -22,12 +22,12 @@ declare global {
 
 // SINGLE IMAGE REGISTRY - FORCED SINGLE ASSET FALLBACK FOR MAXIMUM STABILITY
 const SALON_IMAGES = {
-  heroBackdrop: "/manifesto.jpg",
-  manifestoInterior: "/manifesto.jpg",
-  collectionHair: "/manifesto.jpg",
-  collectionBeard: "/manifesto.jpg",
-  collectionAtmosphere: "/manifesto.jpg",
-  footprintBasin: "/manifesto.jpg"
+  heroBackdrop: "/Advance cut image.jpeg",
+  manifestoInterior: "/Advance cut image.jpeg",
+  collectionHair: "/Advance cut image.jpeg",
+  collectionBeard: "/Advance cut image.jpeg",
+  collectionAtmosphere: "/Advance cut image.jpeg",
+  footprintBasin: "/Advance cut image.jpeg"
 }
 
 function splitIntoWords(el: HTMLElement): HTMLElement[] {
