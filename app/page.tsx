@@ -20,7 +20,7 @@ declare global {
   }
 }
 
-// SINGLE IMAGE REGISTRY - FORCED SINGLE ASSET FALLBACK FOR MAXIMUM STABILITY
+// FORCED SINGLE ASSET REGISTRY - USES THE EXACT WORKING FILENAME
 const SALON_IMAGES = {
   heroBackdrop: "/Advance cut image.jpeg",
   manifestoInterior: "/Advance cut image.jpeg",
@@ -118,7 +118,7 @@ export default function Page() {
       setSonicWaveActive(true)
       setTimeout(() => setSonicWaveActive(false), 150)
     } catch (e) {
-      // Audio failsafe
+      // Audio fallback silent capture
     }
   }
 
@@ -151,7 +151,6 @@ export default function Page() {
           loadScript("https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.topology.min.js")
         ])
       } catch (err) {
-        console.log("[v0] Core system bypass:", (err as Error).message)
         revealFallback()
         return
       }
