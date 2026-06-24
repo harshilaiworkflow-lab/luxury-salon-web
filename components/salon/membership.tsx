@@ -8,7 +8,7 @@ const MEMBERSHIP_TERMS = [
   "Membership discount is applicable on current rate card."
 ]
 
-export default function Membership() {
+export function Membership() {
   return (
     <section id="membership" className="reveal relative w-full py-32 bg-[#0A0A0A] border-t border-neutral-900/40">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start w-full">
