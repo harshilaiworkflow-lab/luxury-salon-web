@@ -1,5 +1,7 @@
 "use client"
 
+import React from "react"
+
 const MEMBERSHIP_TERMS = [
   "Membership is Non-Refundable.",
   "No top-up in any membership.",
@@ -56,3 +58,6 @@ export function Membership() {
     </section>
   )
 }
+
+// Default export fallback to prevent build failures across files
+export default Membership
